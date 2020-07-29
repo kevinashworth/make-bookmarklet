@@ -1,0 +1,37 @@
+{
+  "name": "make-bookmarklet",
+  "version": "1.0.0",
+  "description": "A Node program to convert small JavaScript files to bookmarklet-ready code.",
+  "main": "make-bookmarklet.js",
+  "scripts": {
+    "test": "semistandard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kevinashworth/make-bookmarklet.git"
+  },
+  "keywords": [
+    "bookmarklet",
+    "JavaScript",
+    "Node"
+  ],
+  "author": "Kevin Ashworth",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kevinashworth/make-bookmarklet/issues"
+  },
+  "homepage": "https://github.com/kevinashworth/make-bookmarklet#readme",
+  "dependencies": {
+    "clipboardy": "^2.3.0",
+    "commander": "^6.0.0"
+  },
+  "devDependencies": {
+    "semistandard": "^14.2.3"
+  },
+  "semistandard": {
+    "ignore": [
+      "/inputs/",
+      "/test_inputs/"
+    ]
+  }
+}
