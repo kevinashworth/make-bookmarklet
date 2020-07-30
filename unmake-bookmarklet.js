@@ -19,12 +19,21 @@ if (source) {
     .replace(/^\s?javascript:/gm, '');
   bookmarklet = decodeURIComponent(bookmarklet);
 
-  console.log('// decoded bookmarklet');
-  console.log(bookmarklet);
+  const standard = require('semistandard');
+  const formatted = standard.lintTextSync(bookmarklet, {
+    fix: true,
+    globals: ['$']
+  });
+  // }).results[0].output;
+  console.log('// decoded and semistandard-ized bookmarklet');
+  console.log(formatted);
 
-  const clipboardy = require('clipboardy');
-  clipboardy.writeSync(bookmarklet);
-  clipboardy.readSync();
+  console.log('// results');
+  console.log(JSON.stringify(formatted, null, 2));
+
+  // const clipboardy = require('clipboardy');
+  // clipboardy.writeSync(formatted);
+  // clipboardy.readSync();
 }
 
 process.exitCode = 0;

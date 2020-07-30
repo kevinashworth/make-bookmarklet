@@ -23,9 +23,7 @@
   "homepage": "https://github.com/kevinashworth/make-bookmarklet#readme",
   "dependencies": {
     "clipboardy": "^2.3.0",
-    "commander": "^6.0.0"
-  },
-  "devDependencies": {
+    "commander": "^6.0.0",
     "semistandard": "^14.2.3"
   },
   "semistandard": {
@@ -33,6 +31,7 @@
       "$"
     ],
     "ignore": [
+      "/examples/",
       "/inputs/",
       "/test_inputs/"
     ]
