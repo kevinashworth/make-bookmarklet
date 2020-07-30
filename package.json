@@ -24,6 +24,7 @@
   "dependencies": {
     "clipboardy": "^2.3.0",
     "commander": "^6.0.0",
+    "prettier": "^2.0.5",
     "semistandard": "^14.2.3"
   },
   "semistandard": {
