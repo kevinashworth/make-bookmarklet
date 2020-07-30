@@ -10,7 +10,7 @@ program
   });
 program
   .option('-a, --aggressive', 'agressively remove code')
-  .option('-c, --component', 'encode URI component');
+  .option('-c, --component', 'use encodeURIComponent, not encodeURI');
 program
   .on('--help', () => {
     console.log('');
