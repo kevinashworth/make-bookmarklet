@@ -36,15 +36,11 @@ if (source) {
     .replace(/[ ]{2,}/g, ' ') // Space runs to one space
     .replace(/^\s+/gm, '') // Remove line-leading whitespace
     .replace(/\s+$/gm, '') // Remove line-ending whitespace
-    .replace(/\s+(\+|-|\*|\/|\*\*|%|\+\+|--)/g, '$1') // Remove whitespace before operators
-    .replace(/(\+|-|\*|\/|\*\*|%|\+\+|--)\s+/g, '$1') // Remove whitespace after operators
-    .replace(/\s+(>|<|<=|>=|!=|!==|==|===)/g, '$1') // Remove whitespace before comparators
-    .replace(/(>|<|<=|>=|!=|!==|==|===)\s+/g, '$1') // Remove whitespace after comparators
-    .replace(/\s+(=|\+=|-=|\*=|\/=|%=)/g, '$1') // Remove whitespace before assignment
-    .replace(/(=|\+=|-=|\*=|\/=|%=)\s+/g, '$1') // Remove whitespace after assignment
-    .replace(/\s+(\(|{|\[|\)|}|\])/g, '$1') // Remove whitespace before parens/braces/brackets
-    .replace(/(\(|{|\[|\)|}|\])\s+/g, '$1') // Remove whitespace after parens/braces/brackets
-    .replace(/,\s+/g, ','); // Remove whitespace after ','
+    .replace(/\s+(\+|-|\*|\/|\*\*|%|\+\+|--)\s+/g, '$1') // Remove whitespace before, after operators
+    .replace(/\s+(>|<|<=|>=|!=|!==|==|===)\s+/g, '$1') // Remove whitespace before, after comparators
+    .replace(/\s+(=|\+=|-=|\*=|\/=|%=)\s+/g, '$1') // Remove whitespace before, after assignment
+    .replace(/\s+(\(|{|\[|\)|}|\])\s+/g, '$1') // Remove whitespace before, after parens/braces/brackets
+    .replace(/\s+,\s+/g, ','); // Remove whitespace before, after ','
 
   if (program.aggressive) {
     bookmarklet = bookmarklet
