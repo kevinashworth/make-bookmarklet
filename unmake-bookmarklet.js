@@ -15,8 +15,7 @@ let bookmarklet;
 const source = fs.readFileSync(filename, 'utf8');
 
 if (source) {
-  bookmarklet = source
-    .replace(/^\s?javascript:/gm, '');
+  bookmarklet = source.replace(/^\s?javascript:/gm, '');
   bookmarklet = decodeURIComponent(bookmarklet);
 
   const prettier = require('prettier');
