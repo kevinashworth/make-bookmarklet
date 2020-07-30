@@ -15,15 +15,21 @@ let bookmarklet;
 const source = fs.readFileSync(filename, 'utf8');
 
 if (source) {
-  bookmarklet = source
-    .replace(/^\s?javascript:/gm, '');
+  bookmarklet = source.replace(/^\s?javascript:/gm, '');
   bookmarklet = decodeURIComponent(bookmarklet);
 
-  console.log('// decoded bookmarklet');
-  console.log(bookmarklet);
+  const prettier = require('prettier');
+  const formatted = prettier.format(bookmarklet, {
+    parser: 'babel',
+    singleQuote: true,
+    trailingComma: 'none'
+  });
+
+  console.log('// decoded and prettier bookmarklet');
+  console.log(formatted);
 
   const clipboardy = require('clipboardy');
-  clipboardy.writeSync(bookmarklet);
+  clipboardy.writeSync(formatted);
   clipboardy.readSync();
 }
 

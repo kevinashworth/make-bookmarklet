@@ -10,13 +10,13 @@ program
   });
 program
   .option('-a, --aggressive', 'agressively remove code')
-  .option('-c, --component', 'encode URI component');
+  .option('-c, --component', 'use encodeURIComponent, not encodeURI');
 program
   .on('--help', () => {
     console.log('');
     console.log('Examples:');
     console.log('  $ node make-bookmarklet.js foo.js');
-    console.log('  $ node make-bookmarklet /Users/baz/Documents/bar.js --aggressive');
+    console.log('  $ node make-bookmarklet /Users/baz/Documents/bar.js -ac');
   });
 program
   .version(require('./package.json').version);
@@ -36,24 +36,19 @@ if (source) {
     .replace(/[ ]{2,}/g, ' ') // Space runs to one space
     .replace(/^\s+/gm, '') // Remove line-leading whitespace
     .replace(/\s+$/gm, '') // Remove line-ending whitespace
-    .replace(/\s+(\+|-|\*|\/|\*\*|%|\+\+|--)/g, '$1') // Remove whitespace before operators
-    .replace(/(\+|-|\*|\/|\*\*|%|\+\+|--)\s+/g, '$1') // Remove whitespace after operators
-    .replace(/\s+(>|<|<=|>=|!=|!==|==|===)/g, '$1') // Remove whitespace before comparators
-    .replace(/(>|<|<=|>=|!=|!==|==|===)\s+/g, '$1') // Remove whitespace after comparators
-    .replace(/\s+(=|\+=|-=|\*=|\/=|%=)/g, '$1') // Remove whitespace before assignment
-    .replace(/(=|\+=|-=|\*=|\/=|%=)\s+/g, '$1') // Remove whitespace after assignment
-    .replace(/\s+(\(|{|\[|\)|}|\])/g, '$1') // Remove whitespace before parens/braces/brackets
-    .replace(/(\(|{|\[|\)|}|\])\s+/g, '$1') // Remove whitespace after parens/braces/brackets
-    .replace(/,\s+/g, ','); // Remove whitespace after ','
-
+    .replace(/\s+(\+|-|\*|\/|\*\*|%|\+\+|--)\s+/g, '$1') // Remove whitespace before, after operators
+    .replace(/\s+(>|<|<=|>=|!=|!==|==|===)\s+/g, '$1') // Remove whitespace before, after comparators
+    .replace(/\s+(=|\+=|-=|\*=|\/=|%=)\s+/g, '$1') // Remove whitespace before, after assignment
+    .replace(/\s+(\(|{|\[|\)|}|\])\s+/g, '$1') // Remove whitespace before, after parens/braces/brackets
+    .replace(/\s+,\s+/g, ','); // Remove whitespace before, after ','
   if (program.aggressive) {
     bookmarklet = bookmarklet
       .replace(/(const|let|var)\s+/g, '') // Remove variable declarations
-      .replace(/window.(location)/g, '$1') // Remove window object
+      .replace(/window.(\w)/g, '$1') // Remove window object
       .replace(/===/, '=='); // Use equality instead of identity comparison
   }
   const encode = program.component ? encodeURIComponent : encodeURI;
-  bookmarklet = 'javascript:' + encode(bookmarklet); // Escape spaces, quotes, etc.
+  bookmarklet = 'javascript:' + encode(bookmarklet); // Escape semicolons, double quotes, etc.
 
   console.log('// bookmarklet');
   console.log(bookmarklet);
