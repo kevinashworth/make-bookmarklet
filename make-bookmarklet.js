@@ -2,47 +2,58 @@
 const fs = require('fs');
 const { program } = require('commander');
 
-let filenameValue;
+let filename;
 program
-  .version(require('./package.json').version)
   .arguments('<filename>')
-  .action(function (filename) {
-    filenameValue = filename;
+  .action((results) => {
+    filename = results;
   });
-program.on('--help', () => {
-  console.log('');
-  console.log('Examples:');
-  console.log('  $ node make-bookmarklet.js foo.js');
-  console.log('  $ node make-bookmarklet /Users/baz/Documents/bar.js');
-});
-program.parse(process.argv);
+program
+  .option('-a, --aggressive', 'agressively remove code')
+  .option('-c, --component', 'encode URI component');
+program
+  .on('--help', () => {
+    console.log('');
+    console.log('Examples:');
+    console.log('  $ node make-bookmarklet.js foo.js');
+    console.log('  $ node make-bookmarklet /Users/baz/Documents/bar.js --aggressive');
+  });
+program
+  .version(require('./package.json').version);
+program
+  .parse(process.argv);
 
 let bookmarklet;
-const filename = filenameValue;
 const source = fs.readFileSync(filename, 'utf8');
 
 if (source) {
   bookmarklet = source
-    .replace(/^\s?javascript:/gm, '') // Zap first line if there's already a bookmarklet comment
-    .replace(/^\s*\/\/.+/gm, '') // Zap commented lines
-    .replace(/^\s*\/\*[^]+?\*\/\n?/gm, '') // Zap block comments
+    .replace(/^\s?javascript:/gm, '') // Remove any existing 'javascript:' prefix
+    .replace(/^\s*\/\/.+/gm, '') // Remove commented lines
+    .replace(/^\s*\/\*[^]+?\*\/\n?/gm, '') // Remove block comments
     .replace(/\t/g, ' ') // Tabs to spaces
+    .replace(/\r?\n|\r/gm, ' ') // Newlines to spaces
     .replace(/[ ]{2,}/g, ' ') // Space runs to one space
-    .replace(/^\s+/gm, '') // Zap line-leading whitespace
-    .replace(/\s+$/gm, '') // Zap line-ending whitespace
-    .replace(/\n/gm, '') // Zap newlines
-    .replace(/\s+=/g, '=') // Zap space before '='
-    .replace(/=\s+/g, '=') // Zap space after '='
-    .replace(/\s+\(/g, '(') // Zap space before '('
-    .replace(/\)\s+/g, ')') // Zap space after ')'
-    .replace(/\s+{/g, '{') // Zap space before '{'
-    .replace(/}\s+/g, '}') // Zap space after '}'
-    .replace(/\s+>/g, '>') // Zap space before '>'
-    .replace(/>\s+/g, '>') // Zap space after '>'
-    .replace(/\s+\+/g, '+') // Zap space before '+'
-    .replace(/\+\s+/g, '+') // Zap space after '+'
-    .replace(/,\s+/g, ','); // Zap space after ','
-  bookmarklet = 'javascript:' + encodeURIComponent(bookmarklet); // Escape spaces, quotes, etc.
+    .replace(/^\s+/gm, '') // Remove line-leading whitespace
+    .replace(/\s+$/gm, '') // Remove line-ending whitespace
+    .replace(/\s+(\+|-|\*|\/|\*\*|%|\+\+|--)/g, '$1') // Remove whitespace before operators
+    .replace(/(\+|-|\*|\/|\*\*|%|\+\+|--)\s+/g, '$1') // Remove whitespace after operators
+    .replace(/\s+(>|<|<=|>=|!=|!==|==|===)/g, '$1') // Remove whitespace before comparators
+    .replace(/(>|<|<=|>=|!=|!==|==|===)\s+/g, '$1') // Remove whitespace after comparators
+    .replace(/\s+(=|\+=|-=|\*=|\/=|%=)/g, '$1') // Remove whitespace before assignment
+    .replace(/(=|\+=|-=|\*=|\/=|%=)\s+/g, '$1') // Remove whitespace after assignment
+    .replace(/\s+(\(|{|\[|\)|}|\])/g, '$1') // Remove whitespace before parens/braces/brackets
+    .replace(/(\(|{|\[|\)|}|\])\s+/g, '$1') // Remove whitespace after parens/braces/brackets
+    .replace(/,\s+/g, ','); // Remove whitespace after ','
+
+  if (program.aggressive) {
+    bookmarklet = bookmarklet
+      .replace(/(const|let|var)\s+/g, '') // Remove variable declarations
+      .replace(/window.(location)/g, '$1') // Remove window object
+      .replace(/===/, '=='); // Use equality instead of identity comparison
+  }
+  const encode = program.component ? encodeURIComponent : encodeURI;
+  bookmarklet = 'javascript:' + encode(bookmarklet); // Escape spaces, quotes, etc.
 
   console.log('// bookmarklet');
   console.log(bookmarklet);

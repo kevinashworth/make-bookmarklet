@@ -29,6 +29,9 @@
     "semistandard": "^14.2.3"
   },
   "semistandard": {
+    "globals": [
+      "$"
+    ],
     "ignore": [
       "/inputs/",
       "/test_inputs/"
