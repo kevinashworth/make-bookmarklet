@@ -1,3 +1,4 @@
+// site_preference=normal is for mobile, skips IMDb forcing you to the mobile apps
 var h = window.location.href;
 const i = h.indexOf('imdb.com');
 const p = h.indexOf('https://pro.imdb.com');
@@ -18,7 +19,7 @@ if (i === -1) {
   if ((t > 1) && (badword > 1)) {
     h = u2;
   } else {
-    h = 1;
+    h = u1;
   }
   window.locatin = h.replace(/https:\/\/[a-z]+/, 'https://pro');
 }
