@@ -10,7 +10,8 @@ program
   });
 program
   .option('-a, --aggressive', 'agressively remove code')
-  .option('-c, --component', 'use encodeURIComponent, not encodeURI');
+  .option('-c, --component', 'use encodeURIComponent, not encodeURI')
+  .option('-d, --debug', 'additional output to the command line');
 program
   .on('--help', () => {
     console.log('');
@@ -27,6 +28,10 @@ let bookmarklet;
 const source = fs.readFileSync(filename, 'utf8');
 
 if (source) {
+  if (program.debug) {
+    console.log('// [debug] input');
+    console.log(source);
+  }
   bookmarklet = source
     .replace(/^\s?javascript:/gm, '') // Remove any existing 'javascript:' prefix
     .replace(/^\s*\/\/.+/gm, '') // Remove commented lines
@@ -62,6 +67,8 @@ if (source) {
   const clipboardy = require('clipboardy');
   clipboardy.writeSync(bookmarklet);
   clipboardy.readSync();
+} else if (program.debug) {
+  console.log('Empty input file.')
 }
 
 process.exitCode = 0;
