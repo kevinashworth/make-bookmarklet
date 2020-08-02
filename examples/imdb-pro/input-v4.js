@@ -1,30 +1,58 @@
-// Combine v2 (better logic) and v3 (site_preference and 4th bad word).
-let h = window.location.href;
+// v4
+// Combines better logic, site_preference, more 'bad' words.
+// Note: site_preference can only be used on Pro URLs.
+(function () {
+  const hr = window.location.href;
+  const nh = new URL(hr);
+  let u = (nh.origin + nh.pathname);
+  // Now u is a clean version of URL, without query params, etc.
 
-const i = h.indexOf('imdb.com');
-if (i === -1) {
-  window.location = 'https://pro.imdb.com/name/nm2825198/?site_preference=normal';
-}
+  // 1. If not on IMDb at all, go to desired IMDbPro home URL.
+  const im = u.indexOf('imdb.com');
+  if (im < 0) {
+    window.location = 'https://pro.imdb.com/name/nm2825198/?site_preference=normal';
+    return;
+  }
 
-const p = h.indexOf('https://pro.imdb.com');
-if (p === 0) {
-  window.location = h.replace('https://pro', 'https://www');
-}
+  // 2. When on IMDbPro, process URL then go to regular IMDb version of page.
+  const pr = u.indexOf('https://pro.imdb.com');
+  if (pr === 0) {
+    // Known subpages that cause errors. Remove from URL before switch to Pro.
+    const b = u.indexOf('boxoffice');
+    const d = u.indexOf('details');
+    const f = u.indexOf('filmmakers');
+    const m = u.indexOf('images');
+    const v = u.indexOf('videos');
+    const bad = Math.max(b, d, f, m, v);
+    if (bad > 0) {
+      u = u.substring(0, bad);
+    }
+    window.location = u.replace('https://pro', 'https://www');
+    return;
+  }
 
-const t = h.indexOf('title');
-// Words that lead to errors on 'title' pages:
-const c = h.indexOf('combined');
-const f1 = h.indexOf('filmmakers');
-const f2 = h.indexOf('fullcredits');
-const r = h.indexOf('reference');
-const badword = Math.max(c, f1, f2, r);
-const u = new URL(h);
-const u1 = (u.origin + u.pathname);
- // If there is one of these bad words, lop it off.
-const u2 = u1.substring(0, badword);
-if ((t > 0) && (badword > 0)) {
-  h = u2;
-} else {
-  h = u1;
-}
-window.location = h.replace(/https:\/\/[a-z]+/, 'https://pro');
+  // 3. When on regular IMDb, process URL before going to IMDbPro version.
+  const t = u.indexOf('title/tt') > 0;
+  const n = u.indexOf('name/nm') > 0;
+  if (t) {
+    // Known words that lead to errors on 'title' pages:
+    const c = u.indexOf('combined');
+    const fi = u.indexOf('filmmakers');
+    const fu = u.indexOf('fullcredits');
+    const r = u.indexOf('reference');
+    const bad = Math.max(c, fi, fu, r);
+    if (bad > 0) {
+      u = u.substring(0, bad);
+    }
+  } else if (n) {
+    // Known words that lead to errors on 'name' pages:
+    const b = u.indexOf('bio');
+    const m = u.indexOf('mediaindex');
+    const bad = Math.max(b, m);
+    if (bad > 0) {
+      u = u.substring(0, bad);
+    }
+  }
+  u = u.concat('?site_preference=normal');
+  window.location = u.replace(/https:\/\/[a-z]+/, 'https://pro');
+})();

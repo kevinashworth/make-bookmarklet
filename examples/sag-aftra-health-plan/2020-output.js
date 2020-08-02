@@ -1,0 +1,1 @@
+javascript:void%20function()%7Bvar%20e=new%20Date,t=e.getDate(),a=e.getMonth()+1,n=e.getFullYear();10>t%26%26(t="0"+t),10>a%26%26(a="0"+a),e=a+"/"+t+"/"+n,$("input")%5B6%5D.value="01/01/2020",$("input")%5B7%5D.value=e;$("%23earningsForm%5C%5C:findBtn").click();%7D();
