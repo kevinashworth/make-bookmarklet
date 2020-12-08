@@ -1,12 +1,8 @@
 (function () {
-  $('#earningsList_rppDD option[value="100"]').prop('selected', true);
-  $('#earningsList_rppDD option[value="100"]').change();
-  setTimeout(function () {
-    $('table[role="grid"] thead tr').append('<th>Row</th>');
-    $('table[role="grid"] tfoot tr').append('<td>Row</td>');
-    $('table[role="grid"] tr.ui-widget-content').each(function (i, val) {
-      var row = '<td>' + (i + 1).toString() + '</td>';
-      $(this).append(row);
-    });
-  }, 1000);
+  $('table[role="grid"]').css({ 'table-layout': 'auto' });
+  $('table[role="grid"] thead tr').append('<th role="columnheader" class="ui-state-default"><span class="ui-column-title" style="word-break: normal;">Row</span></th>');
+  $('table[role="grid"] tr.ui-widget-content').each(function (i, val) {
+    var row = '<td role="gridcell"><span class="ui-column-title">Row</span>' + (i + 1).toString() + '</td>';
+    $(this).append(row);
+  });
 })();
