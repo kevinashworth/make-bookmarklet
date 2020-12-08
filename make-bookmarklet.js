@@ -49,7 +49,7 @@ if (source) {
     .replace(/\s?(>|<|<=|>=|!=|!==|==|===)\s?/g, '$1') // Remove whitespace before, after comparators
     .replace(/\s?(=|\+=|-=|\*=|\/=|%=)\s?/g, '$1') // Remove whitespace before, after assignment
     .replace(/\s?(\(|{|\[|\)|}|\])\s?/g, '$1') // Remove whitespace before, after parens/braces/brackets
-    .replace(/\s?(,|;)\s?/g, '$1'); // Remove whitespace before, after punctuation
+    .replace(/\s?(,|;|:)\s?/g, '$1'); // Remove whitespace before, after punctuation
   if (program.aggressive) {
     bookmarklet = bookmarklet
       .replace(/(const|let|var)\s+/g, '') // Remove variable declarations
