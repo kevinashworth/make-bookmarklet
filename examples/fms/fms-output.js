@@ -1,0 +1,1 @@
+javascript:(function()%7Bvar%20elems%20=%20Array.prototype.slice.call(document.scripts).find(function(e)%7Bif%20(e.hasAttribute(%22data-config%22))%20return%20e;%7D).getAttribute('data-config').split('/');%20location.href%20=%20%5B%22https:%22,%22%22,%22cdn.video.playwire.com%22,elems%5B3%5D,elems%5B4%5D,elems%5B6%5D,%22video-sd.mp4?hosting_id=%22+elems%5B3%5D%5D.join('/')%7D())
