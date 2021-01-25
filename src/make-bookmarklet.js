@@ -24,7 +24,7 @@ program
     console.log('  $ node make-bookmarklet /Users/baz/Documents/bar.js -ac');
   });
 program
-  .version(require('./package.json').version);
+  .version(require('../package.json').version);
 program
   .parse(process.argv);
 

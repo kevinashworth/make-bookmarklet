@@ -8,7 +8,7 @@ var verbose = chalk.bold.yellow;
 
 let filename;
 program
-  .version(require('./package.json').version)
+  .version(require('../package.json').version)
   .arguments('<filename>')
   .action((results) => {
     filename = results;
