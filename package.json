@@ -4,7 +4,8 @@
   "description": "A Node program to convert small JavaScript files to bookmarklet-ready code.",
   "main": "make-bookmarklet.js",
   "scripts": {
-    "test": "semistandard"
+    "test": "semistandard",
+    "lint": "semistandard --fix"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,7 @@
     "chalk": "^4.1.0",
     "clipboardy": "^2.3.0",
     "commander": "^6.1.0",
-    "prettier": "^2.1.2",
+    "prettier": "^2.2.1",
     "semistandard": "^14.2.3"
   },
   "semistandard": {
@@ -34,7 +35,7 @@
     ],
     "ignore": [
       "/examples/bookmarklets/",
-      "/examples/imdb-pro/output-*.js",
+      "/examples/**/*output*.js",
       "/examples/sag-aftra-health-plan/2020-output.js",
       "/inputs/",
       "/test_inputs/"
