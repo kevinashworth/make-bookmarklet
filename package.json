@@ -1,8 +1,8 @@
 {
   "name": "make-bookmarklet",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "description": "A Node program to convert small JavaScript files to bookmarklet-ready code.",
-  "main": "make-bookmarklet.js",
+  "main": "src/make-bookmarklet.js",
   "scripts": {
     "test": "semistandard",
     "lint": "semistandard --fix"
@@ -35,6 +35,7 @@
     ],
     "ignore": [
       "/examples/bookmarklets/",
+      "/examples/shortwave/sw.js",
       "/examples/**/*output*.js",
       "/examples/sag-aftra-health-plan/2020-output.js",
       "/inputs/",
