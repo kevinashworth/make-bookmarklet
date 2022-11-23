@@ -1,14 +1,18 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const { program } = require('commander');
-var chalk = require('chalk');
-var error = chalk.bold.red;
-var success = chalk.bold.green;
-var verbose = chalk.bold.yellow;
+import fs from 'fs';
+import { program } from 'commander';
+import chalk from 'chalk';
+import clipboardy from 'clipboardy';
+import prettier from 'prettier';
+
+const { version } = JSON.parse(fs.readFileSync('package.json'));
+const error = chalk.bold.red;
+const success = chalk.bold.green;
+const verbose = chalk.bold.yellow;
 
 let filename;
 program
-  .version(require('../package.json').version)
+  .version(version)
   .arguments('<filename>')
   .action((results) => {
     filename = results;
@@ -28,7 +32,6 @@ if (source) {
   bookmarklet = source.replace(/^\s?javascript:/gm, '');
   bookmarklet = decodeURIComponent(bookmarklet);
 
-  const prettier = require('prettier');
   const formatted = prettier.format(bookmarklet, {
     parser: 'babel',
     singleQuote: true,
@@ -38,7 +41,6 @@ if (source) {
   console.log(success('// decoded and prettier bookmarklet'));
   console.log(formatted);
 
-  const clipboardy = require('clipboardy');
   clipboardy.writeSync(formatted);
   clipboardy.readSync();
 } else {
