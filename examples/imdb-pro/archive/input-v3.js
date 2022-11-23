@@ -1,5 +1,5 @@
 // site_preference=normal is for mobile, skips IMDb forcing you to the mobile apps
-var h = window.location.href;
+let h = window.location.href;
 const i = h.indexOf('imdb.com');
 const p = h.indexOf('https://pro.imdb.com');
 const t = h.indexOf('title');

@@ -1,5 +1,5 @@
 (function () {
-  var elems = Array.prototype.slice
+  const elems = Array.prototype.slice
     .call(document.scripts)
     .find(function (e) {
       if (e.hasAttribute('data-config')) return e;
