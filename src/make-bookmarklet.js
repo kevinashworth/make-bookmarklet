@@ -1,10 +1,12 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const { program } = require('commander');
-var chalk = require('chalk');
-var error = chalk.bold.red;
-var success = chalk.bold.green;
-var verbose = chalk.bold.yellow;
+import fs from 'fs';
+import { program } from 'commander';
+import chalk from 'chalk';
+import clipboardy from 'clipboardy';
+const { version } = JSON.parse(fs.readFileSync('package.json'));
+const error = chalk.bold.red;
+const success = chalk.bold.green;
+const verbose = chalk.bold.yellow;
 
 let filename;
 program
@@ -20,11 +22,11 @@ program
   .on('--help', () => {
     console.log('');
     console.log('Examples:');
-    console.log('  $ node make-bookmarklet.js foo.js');
-    console.log('  $ node make-bookmarklet /Users/baz/Documents/bar.js -ac');
+    console.log('  $ node src/make-bookmarklet.js foo.js');
+    console.log('  $ node src/make-bookmarklet /Users/baz/Documents/bar.js -ac');
   });
 program
-  .version(require('../package.json').version);
+  .version(version);
 program
   .parse(process.argv);
 
@@ -68,7 +70,7 @@ if (source) {
   console.log(success('// bookmarklet'));
   console.log(bookmarklet);
 
-  const clipboardy = require('clipboardy');
+  // const clipboardy = require('clipboardy');
   clipboardy.writeSync(bookmarklet);
   clipboardy.readSync();
   if (program.debug) {
