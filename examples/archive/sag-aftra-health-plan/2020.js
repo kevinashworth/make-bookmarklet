@@ -1,8 +1,8 @@
 (function () {
-  var e = new Date();
-  var m = e.getMonth() + 1;
-  var d = e.getDate();
-  var y = e.getFullYear();
+  let e = new Date();
+  let m = e.getMonth() + 1;
+  let d = e.getDate();
+  const y = e.getFullYear();
   d < 10 && (d = '0' + d);
   m < 10 && (m = '0' + m);
   e = m + '/' + d + '/' + y;
