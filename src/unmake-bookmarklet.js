@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import fs from 'fs';
-import { program } from 'commander';
-import chalk from 'chalk';
-import clipboardy from 'clipboardy';
-import prettier from 'prettier';
+const fs = require('fs');
+const chalk = require('chalk');
+const clipboardy = require('clipboardy');
+const { program } = require('commander');
+const prettier = require('prettier');
 
 const { version } = JSON.parse(fs.readFileSync('package.json'));
 const error = chalk.bold.red;

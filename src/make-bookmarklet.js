@@ -1,8 +1,9 @@
 #!/usr/bin/env node
-import fs from 'fs';
-import { program } from 'commander';
-import chalk from 'chalk';
-import clipboardy from 'clipboardy';
+const fs = require('fs');
+const chalk = require('chalk');
+const clipboardy = require('clipboardy');
+const { program } = require('commander');
+
 const { version } = JSON.parse(fs.readFileSync('package.json'));
 const error = chalk.bold.red;
 const success = chalk.bold.green;
@@ -70,7 +71,6 @@ if (source) {
   console.log(success('// bookmarklet'));
   console.log(bookmarklet);
 
-  // const clipboardy = require('clipboardy');
   clipboardy.writeSync(bookmarklet);
   clipboardy.readSync();
   if (program.debug) {
