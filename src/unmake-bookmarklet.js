@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import fs from 'fs';
-import { program } from 'commander';
-import chalk from 'chalk';
-import clipboardy from 'clipboardy';
-import prettier from 'prettier';
+const fs = require('fs');
+const chalk = require('chalk');
+const clipboardy = require('clipboardy');
+const { program } = require('commander');
+const prettier = require('prettier');
 
 const { version } = JSON.parse(fs.readFileSync('package.json'));
 const error = chalk.bold.red;
@@ -11,20 +11,25 @@ const success = chalk.bold.green;
 const verbose = chalk.bold.yellow;
 
 let filename;
-program
-  .version(version)
-  .arguments('<filename>')
-  .action((results) => {
-    filename = results;
-  });
+program.arguments('<filename>').action((results) => {
+  filename = results;
+});
 program.option('-d, --debug', 'verbose output to the command line');
+program.on('--help', () => {
+  console.log('');
+  console.log('Examples:');
+  console.log('  $ node src/unmake-bookmarklet.js foo.js');
+  console.log('  $ node src/unmake-bookmarklet /Users/baz/Documents/bar.js -d');
+});
+program.version(version);
 program.parse(process.argv);
+const options = program.opts();
 
 let bookmarklet;
 const source = fs.readFileSync(filename, 'utf8');
 
 if (source) {
-  if (program.debug) {
+  if (options.debug) {
     console.log(verbose('// [debug] input'));
     console.log(source);
     console.log(' ');
