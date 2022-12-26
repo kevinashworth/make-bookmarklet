@@ -10,32 +10,28 @@ const success = chalk.bold.green;
 const verbose = chalk.bold.yellow;
 
 let filename;
-program
-  .arguments('<filename>')
-  .action((results) => {
-    filename = results;
-  });
+program.arguments('<filename>').action((results) => {
+  filename = results;
+});
 program
   .option('-a, --aggressive', 'agressively remove code')
   .option('-c, --component', 'use encodeURIComponent, not encodeURI')
   .option('-d, --debug', 'verbose output to the command line');
-program
-  .on('--help', () => {
-    console.log('');
-    console.log('Examples:');
-    console.log('  $ node src/make-bookmarklet.js foo.js');
-    console.log('  $ node src/make-bookmarklet /Users/baz/Documents/bar.js -ac');
-  });
-program
-  .version(version);
-program
-  .parse(process.argv);
+program.on('--help', () => {
+  console.log('');
+  console.log('Examples:');
+  console.log('  $ node src/make-bookmarklet.js foo.js');
+  console.log('  $ node src/make-bookmarklet /Users/baz/Documents/bar.js -ac');
+});
+program.version(version);
+program.parse(process.argv);
+const options = program.opts();
 
 let bookmarklet;
 const source = fs.readFileSync(filename, 'utf8');
 
 if (source) {
-  if (program.debug) {
+  if (options.debug) {
     console.log(verbose('// [debug] input'));
     console.log(source);
   }
@@ -53,19 +49,19 @@ if (source) {
     .replace(/\s?(=|\+=|-=|\*=|\/=|%=)\s?/g, '$1') // Remove whitespace before, after assignment
     .replace(/\s?(\(|{|\[|\)|}|\])\s?/g, '$1') // Remove whitespace before, after parens/braces/brackets
     .replace(/\s?(,|;|:)\s?/g, '$1'); // Remove whitespace before, after punctuation
-  if (program.aggressive) {
+  if (options.aggressive) {
     bookmarklet = bookmarklet
       .replace(/(const|let|var)\s+/g, '') // Remove variable declarations
       .replace(/window.(\w)/g, '$1') // Remove window object
       .replace(/===/, '=='); // Use equality instead of identity comparison
   }
-  if (program.debug) {
+  if (options.debug) {
     console.log(' ');
     console.log(verbose('// [debug] bookmarklet before encoding'));
     console.log(bookmarklet);
     console.log(' ');
   }
-  const encode = program.component ? encodeURIComponent : encodeURI;
+  const encode = options.component ? encodeURIComponent : encodeURI;
   bookmarklet = 'javascript:' + encode(bookmarklet); // Escape semicolons, double quotes, etc.
 
   console.log(success('// bookmarklet'));
@@ -73,7 +69,7 @@ if (source) {
 
   clipboardy.writeSync(bookmarklet);
   clipboardy.readSync();
-  if (program.debug) {
+  if (options.debug) {
     console.log(verbose('// [debug] copied to clipboard'));
   }
 } else {
