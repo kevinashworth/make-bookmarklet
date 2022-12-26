@@ -10,7 +10,8 @@
     "lint": "semistandard",
     "lint:fix": "semistandard --fix",
     "minor": "npm version minor",
-    "patch": "npm version patch"
+    "patch": "npm version patch",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "chalk": "4.1.2",
     "clipboardy": "2.3.0",
     "commander": "9.4.1",
+    "jest": "29.3.1",
     "prettier": "2.8.1",
     "semistandard": "16.0.1"
   },
