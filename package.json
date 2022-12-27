@@ -45,7 +45,8 @@
       "/examples/bookmarklets/",
       "/examples/**/*output*.js",
       "/examples/shortwave/sw.js",
-      "/test_inputs/"
+      "/test_inputs/",
+      "/src/__tests__/__fixtures__/"
     ]
   }
 }
