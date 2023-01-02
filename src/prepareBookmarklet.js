@@ -11,7 +11,7 @@ function prepareBookmarklet (
   options = { aggressive: false, component: false, debug: false }
 ) {
   if (!source) {
-    return null;
+    return source;
   }
   let prepared = source
     .replace(/^\s?javascript:/gm, '') // Remove any existing 'javascript:' prefix
@@ -31,7 +31,7 @@ function prepareBookmarklet (
     prepared = prepared
       .replace(/(const|let|var)\s+/g, '') // Remove variable declarations
       .replace(/window.(\w)/g, '$1') // Remove window object
-      .replace(/===/, '=='); // Use equality instead of identity comparison
+      .replace(/===/g, '=='); // Use equality instead of identity comparison
   }
   return prepared;
 }
