@@ -1,5 +1,7 @@
 {
-  "bail": 1,
-  "testPathIgnorePatterns": ["<rootDir>/src/__tests__/__fixtures__/"],
+  "testPathIgnorePatterns": [
+    "<rootDir>/src/__tests__/__fixtures__/",
+    "<rootDir>/src/__tests__/utils/"
+  ],
   "verbose": true
 }

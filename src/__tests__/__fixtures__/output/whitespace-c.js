@@ -1,0 +1,1 @@
+javascript:(function()%7Bconst%20x%3D3%3Bconst%20y%3Dx%3D%3D%3D3%20%3F%202%3A1%3Bconsole.log(x%2Cy)%3B%7D)()%3B

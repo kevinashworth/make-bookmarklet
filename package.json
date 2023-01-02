@@ -38,7 +38,13 @@
   },
   "semistandard": {
     "globals": [
-      "$"
+      "$",
+      "describe",
+      "expect",
+      "fit",
+      "it",
+      "test",
+      "xit"
     ],
     "ignore": [
       "/examples/archive/",

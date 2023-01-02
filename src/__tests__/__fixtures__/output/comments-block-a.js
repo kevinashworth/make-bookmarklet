@@ -1,0 +1,1 @@
+(function(){x=3;y=x==3 ? 2:1;console.log(x,y);})();
