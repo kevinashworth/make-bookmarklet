@@ -4,7 +4,7 @@
 * [Install](#install)
 * [Use](#use)
 * [Options](#options)
-* [Unmake / Reversal](#unmake-reversal)
+* [Unmake / Reversal](#unmake--reversal)
 
 
 ## Install
@@ -27,7 +27,11 @@ node src/make-bookmarklet inputfile.js
 
 This creates a bookmarklet out of the JavaScript in `inputfile.js`. It outputs the new bookmarklet to the command line and also copies the new bookmarklet to the clipboard.
 
-So, given `inputfile.js`:
+For some ideas on what goes into an input file, see the [examples](examples) folder or see below. I often use an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE), but you can see [the Shortwave folder](examples/shortwave) for a non-IIFE example. Typically I test out the code by pasting it into my browser console. Once it works to my liking there, I convert it to a bookmarklet.
+
+### A complete, simple example
+
+So, given `inputfile.js` in the top directory of this repo
 ```javascript
 h = window.location.href;
 i = h.indexOf('imdb.com');
@@ -52,7 +56,7 @@ else if (p === -1) {
 };
 ```
 
-Running `make-bookmarklet` yields:
+then, running `node src/make-bookmarklet inputfile.js` yields:
 ```
 javascript:var%20h=window.location.href;%20const%20i=h.indexOf('imdb.com');%20const%20p=h.indexOf('https://pro.imdb.com');%20const%20t=h.indexOf('title');%20const%20c=h.indexOf('combined');%20const%20f=h.indexOf('fullcredits');%20const%20r=h.indexOf('reference');%20const%20badword=Math.max(c,%20f,%20r);%20if%20(i===-1)%7Bwindow.location='https://pro.imdb.com/name/nm2825198/';%7Delse%20if%20(p===0)%7Bwindow.location=h.replace('https://pro',%20'https://www');%7Delse%20if%20(p===-1)%7Bif%20((t%3E1)%20&&%20(badword%3E1))%7Bh=h.substring(0,%20badword);%7Dwindow.location=h.replace(/https:%5C/%5C/%5Ba-z%5D+/,%20'https://pro');%20%7D
 ```
