@@ -28,28 +28,44 @@ const options = program.opts();
 let bookmarklet;
 const source = fs.readFileSync(filename, 'utf8');
 
-if (source) {
+(async function () {
+  if (!source) {
+    console.log(error('Empty input file.'));
+    process.exitCode = 1;
+    return;
+  }
+
   if (options.debug) {
     console.log(verbose('// [debug] input'));
     console.log(source);
     console.log(' ');
   }
-  bookmarklet = source.replace(/^\s?javascript:/gm, '');
-  bookmarklet = decodeURIComponent(bookmarklet);
 
-  const formatted = prettier.format(bookmarklet, {
-    parser: 'babel',
-    singleQuote: true,
-    trailingComma: 'none'
-  });
+  try {
+    bookmarklet = source.replace(/^\s?javascript:/gm, '');
+    bookmarklet = decodeURIComponent(bookmarklet);
 
-  console.log(success('// decoded and prettier bookmarklet'));
-  console.log(formatted);
+    const formatted = await prettier.format(bookmarklet, {
+      parser: 'babel',
+      singleQuote: true,
+      trailingComma: 'none'
+    });
 
-  clipboardy.writeSync(formatted);
-  clipboardy.readSync();
-} else {
-  console.log(error('Empty input file.'));
-}
+    console.log(success('// decoded and prettier bookmarklet'));
+    console.log(formatted);
 
-process.exitCode = 0;
+    try {
+      clipboardy.writeSync(String(formatted));
+      if (options.debug) {
+        console.log(verbose('// [debug] copied to clipboard'));
+      }
+    } catch (err) {
+      console.log(error(`Failed to copy to clipboard: ${err.message || err}`));
+    }
+
+    process.exitCode = 0;
+  } catch (err) {
+    console.log(error(err.message || err));
+    process.exitCode = 1;
+  }
+})();
