@@ -16,7 +16,9 @@ function prepareBookmarklet (
   let prepared = source
     .replace(/^\s?javascript:/gm, '') // Remove any existing 'javascript:' prefix
     .replace(/^\s*\/\/.+/gm, '') // Remove commented lines
-    .replace(/^\s*\/\*[^]+?\*\/\n?/gm, '') // Remove block comments
+    .replace(/\/\/.+/g, '') // Remove in-line comments
+    .replace(/^\s*\/\*[\s\S]*?\*\/\n?/gm, '') // Remove block comments that occupy a full line (and trailing newline)
+    .replace(/\/\*[\s\S]*?\*\//g, '') // Remove inline block comments
     .replace(/\t/g, ' ') // Tabs to spaces
     .replace(/\r?\n|\r/gm, ' ') // Newlines to spaces
     .replace(/[ ]{2,}/g, ' ') // Space runs to one space

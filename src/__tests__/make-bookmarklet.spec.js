@@ -4,7 +4,7 @@ const prepareBookmarklet = require('../prepareBookmarklet');
 
 describe('prepareBookmarklet / encodeBookmarklet', () => {
   describe('Handles comments', () => {
-    xit('Removes in-line comments', () => {
+    it('Removes in-line comments', () => {
       const { input, output } = getIO('comments-inline.js');
       expect(prepareBookmarklet(input)).toEqual(output);
     });
