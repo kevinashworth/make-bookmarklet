@@ -1,7 +1,11 @@
-const fs = require('fs');
-const path = require('path');
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
 
 // option is "a", "c", "d" or blank
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 function getIO (fileName, option = '') {
   const outputFileName = option
     ? fileName.replace('.js', '-' + option + '.js')
@@ -23,4 +27,4 @@ function getIO (fileName, option = '') {
   }
 }
 
-module.exports = getIO;
+export default getIO;

@@ -9,7 +9,9 @@
 
 ## Install
 
-Assuming you already have [Node.js](https://nodejs.org/), clone this repository, and run `npm install`:
+**Requires Node.js 20 or newer.**
+
+Assuming you already have Node.js, clone this repository and run `npm install`:
 
 ```bash
 git clone https://github.com/kevinashworth/make-bookmarklet.git
@@ -17,9 +19,11 @@ cd make-bookmarklet
 npm i
 ```
 
+You can run the tool locally with Node for development, or link it locally with `npm link` and run the `make-bookmarklet` command directly. After publishing to npm, users will be able to run it via `npx make-bookmarklet inputfile.js` without installing it globally.
+
 ## Use
 
-To run `make-bookmarklet`, call it from the command line with the JavaScript file you wish to convert to a bookmarklet:
+To run `make-bookmarklet`, you can use `npx make-bookmarklet inputfile.js` (after the package is published). For local development you can run `node src/make-bookmarklet inputfile.js` or use `npm link` and run `make-bookmarklet inputfile.js`.
 
 ```bash
 node src/make-bookmarklet inputfile.js

@@ -2,7 +2,12 @@
   "name": "make-bookmarklet",
   "version": "1.6.0",
   "description": "A Node program to convert small JavaScript files to bookmarklet-ready code.",
+  "type": "module",
   "main": "src/make-bookmarklet.js",
+  "bin": {
+    "make-bookmarklet": "src/make-bookmarklet.js",
+    "unmake-bookmarklet": "src/unmake-bookmarklet.js"
+  },
   "engines": {
     "node": ">=20"
   },
@@ -11,7 +16,7 @@
     "lint:fix": "semistandard --fix",
     "minor": "npm version minor",
     "patch": "npm version patch",
-    "test": "jest"
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
