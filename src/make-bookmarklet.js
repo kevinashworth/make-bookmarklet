@@ -13,26 +13,43 @@ function makeBookmarklet () {
   const verbose = chalk.bold.yellow;
 
   let filename;
-  program.arguments('<filename>').action((results) => {
+  program.arguments('[filename]').action((results) => {
     filename = results;
   });
   program
     .option('-a, --aggressive', 'agressively remove code')
     .option('-c, --component', 'use encodeURIComponent, not encodeURI')
-    .option('-d, --debug', 'verbose output to the command line');
+    .option('-d, --debug', 'verbose output to the command line')
+    .option('--no-clipboard', 'do not copy bookmarklet to clipboard');
   program.on('--help', () => {
     console.log('');
     console.log('Examples:');
     console.log('  $ node src/make-bookmarklet.js foo.js');
-    console.log(
-      '  $ node src/make-bookmarklet /Users/baz/Documents/bar.js -ac'
-    );
+    console.log('  $ cat foo.js | node src/make-bookmarklet.js');
+    console.log('  $ node src/make-bookmarklet.js foo.js --no-clipboard > out.txt');
   });
   program.version(version);
   program.parse(process.argv);
   const options = program.opts();
 
-  const source = fs.readFileSync(filename, 'utf8');
+  // Read source from filename, or from stdin when no filename and stdin is piped
+  let source;
+  try {
+    if (!filename && !process.stdin.isTTY) {
+      source = fs.readFileSync(0, 'utf8');
+    } else if (filename) {
+      source = fs.readFileSync(filename, 'utf8');
+    } else {
+      console.log(error('No input file specified.')); // interactive use
+      process.exitCode = 1;
+      return;
+    }
+  } catch (e) {
+    console.log(error('Failed to read input: ' + (e.message || e)));
+    process.exitCode = 1;
+    return;
+  }
+
   if (!source) {
     console.log(error('Empty input file.'));
     process.exitCode = 1;
@@ -50,13 +67,25 @@ function makeBookmarklet () {
   }
   const bookmarklet = encodeBookmarklet(prepared, options);
 
-  console.log(success('// bookmarklet'));
-  console.log(bookmarklet);
-
-  clipboardy.writeSync(bookmarklet);
-  if (options.debug) {
-    console.log(verbose('// [debug] copied to clipboard'));
+  // If stdout is piped, print only the bookmarklet (suitable for piping)
+  const stdoutIsTTY = process.stdout.isTTY;
+  if (!stdoutIsTTY && !options.debug) {
+    console.log(bookmarklet);
+  } else {
+    console.log(success('// bookmarklet'));
+    console.log(bookmarklet);
   }
+
+  // Copy to clipboard unless explicitly disabled
+  if (options.clipboard) {
+    try {
+      clipboardy.writeSync(bookmarklet);
+      if (options.debug) console.log(verbose('// [debug] copied to clipboard'));
+    } catch (err) {
+      console.log(error(`Failed to copy to clipboard: ${err.message || err}`));
+    }
+  }
+
   process.exitCode = 0;
 }
 
