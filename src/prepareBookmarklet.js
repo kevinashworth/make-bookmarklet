@@ -38,4 +38,4 @@ function prepareBookmarklet (
   return prepared;
 }
 
-module.exports = prepareBookmarklet;
+export default prepareBookmarklet;

@@ -1,6 +1,6 @@
-const getIO = require('./utils/getIO');
-const encodeBookmarklet = require('../encodeBookmarklet');
-const prepareBookmarklet = require('../prepareBookmarklet');
+import getIO from './utils/getIO.js';
+import encodeBookmarklet from '../encodeBookmarklet.js';
+import prepareBookmarklet from '../prepareBookmarklet.js';
 
 describe('prepareBookmarklet / encodeBookmarklet', () => {
   describe('Handles comments', () => {

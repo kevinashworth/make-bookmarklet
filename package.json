@@ -1,17 +1,20 @@
 {
   "name": "make-bookmarklet",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "description": "A Node program to convert small JavaScript files to bookmarklet-ready code.",
+  "type": "module",
   "main": "src/make-bookmarklet.js",
+  "bin": {
+    "make-bookmarklet": "src/make-bookmarklet.js",
+    "unmake-bookmarklet": "src/unmake-bookmarklet.js"
+  },
   "engines": {
     "node": ">=20"
   },
   "scripts": {
     "lint": "semistandard",
     "lint:fix": "semistandard --fix",
-    "minor": "npm version minor",
-    "patch": "npm version patch",
-    "test": "jest"
+    "test": "vitest"
   },
   "repository": {
     "type": "git",
@@ -29,14 +32,15 @@
   },
   "homepage": "https://github.com/kevinashworth/make-bookmarklet#readme",
   "dependencies": {
-    "chalk": "4.1.2",
-    "clipboardy": "2.3.0",
+    "chalk": "5.6.2",
+    "clipboardy": "5.0.2",
     "commander": "14.0.2",
-    "jest": "30.2.0",
     "prettier": "3.8.0"
   },
   "devDependencies": {
-    "semistandard": "17.0.0"
+    "semistandard": "17.0.0",
+    "vitest": "4.0.17",
+    "execa": "9.6.1"
   },
   "semistandard": {
     "globals": [

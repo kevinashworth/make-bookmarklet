@@ -1,10 +1,10 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const chalk = require('chalk');
-const clipboardy = require('clipboardy');
-const { program } = require('commander');
-const encodeBookmarklet = require('./encodeBookmarklet');
-const prepareBookmarklet = require('./prepareBookmarklet');
+import fs from 'fs';
+import chalk from 'chalk';
+import clipboardy from 'clipboardy';
+import { program } from 'commander';
+import encodeBookmarklet from './encodeBookmarklet.js';
+import prepareBookmarklet from './prepareBookmarklet.js';
 
 function makeBookmarklet () {
   const { version } = JSON.parse(fs.readFileSync('package.json'));

@@ -18,4 +18,4 @@ function encodeBookmarklet (
   return bookmarklet;
 }
 
-module.exports = encodeBookmarklet;
+export default encodeBookmarklet;
