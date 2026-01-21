@@ -14,8 +14,6 @@
   "scripts": {
     "lint": "semistandard",
     "lint:fix": "semistandard --fix",
-    "minor": "npm version minor",
-    "patch": "npm version patch",
     "test": "vitest"
   },
   "repository": {
