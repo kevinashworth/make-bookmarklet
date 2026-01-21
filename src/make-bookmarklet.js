@@ -2,16 +2,18 @@
 import fs from 'fs';
 import chalk from 'chalk';
 import clipboardy from 'clipboardy';
-import { program } from 'commander';
+import { Command } from 'commander';
+import { fileURLToPath } from 'url';
 import encodeBookmarklet from './encodeBookmarklet.js';
 import prepareBookmarklet from './prepareBookmarklet.js';
 
-function makeBookmarklet () {
+export default function makeBookmarklet () {
   const { version } = JSON.parse(fs.readFileSync('package.json'));
   const error = chalk.bold.red;
   const success = chalk.bold.green;
   const verbose = chalk.bold.yellow;
 
+  const program = new Command();
   let filename;
   program.arguments('[filename]').action((results) => {
     filename = results;
@@ -89,4 +91,7 @@ function makeBookmarklet () {
   process.exitCode = 0;
 }
 
-makeBookmarklet();
+// Only execute when run directly
+if (fileURLToPath(import.meta.url) === process.argv[1]) {
+  makeBookmarklet();
+}
