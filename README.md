@@ -1,29 +1,14 @@
 # make-bookmarklet
 
 ## Table of Contents
-* [Install](#install)
 * [Use](#use)
 * [Options](#options)
 * [Unmake / Reversal](#unmake--reversal)
-
-
-## Install
-
-**Requires Node.js 20 or newer.**
-
-Assuming you already have Node.js, clone this repository and run `npm install`:
-
-```bash
-git clone https://github.com/kevinashworth/make-bookmarklet.git
-cd make-bookmarklet
-npm i
-```
-
-After publishing to npm, users will be able to run it via `npx make-bookmarklet inputfile.js` without installing it globally. For development and contributor notes (testing, linking, linting, versioning, and release steps) see DEVELOPMENT.md.
+* [Install](#install)
 
 ## Use
 
-To run `make-bookmarklet`, you can use `npx make-bookmarklet inputfile.js` (after the package is published). For local development you can run `node src/make-bookmarklet inputfile.js` or use `npm link` and run `make-bookmarklet inputfile.js`.
+To run `make-bookmarklet`, the recommended approach is via `npx` (no install required): `npx make-bookmarklet inputfile.js`. Alternatively you can install globally with `npm install -g make-bookmarklet` and run `make-bookmarklet inputfile.js`, or run locally for development: `node src/make-bookmarklet inputfile.js`. See the **Install** section at the end of this README for installation details and links to development notes.
 
 ```bash
 node src/make-bookmarklet inputfile.js
@@ -116,3 +101,17 @@ node src/unmake-bookmarklet bookmarklet.js
 ```
 
 Please note, this is not a true reversal or re-creation of any JavaScript that went in to creating a bookmarklet, but it does convert a hard-to-read bookmarklet into [`prettier`](https://prettier.io) code.
+
+## Install
+
+**Requires Node.js 20 or newer.**
+
+Quick options for end users:
+
+- Run via `npx` without installing: `npx make-bookmarklet inputfile.js` (recommended).
+- Install globally: `npm install -g make-bookmarklet` then run `make-bookmarklet inputfile.js`.
+- For local use from source: clone the repo, run `npm i`, and run `node src/make-bookmarklet inputfile.js`.
+
+### For contributors
+
+If you're contributing, see DEVELOPMENT.md for setup, testing, linting, and release notes. Please run `npm test` and `npm run lint` locally and add tests for public-facing changes before opening a PR.
