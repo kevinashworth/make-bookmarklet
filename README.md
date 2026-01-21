@@ -19,7 +19,7 @@ cd make-bookmarklet
 npm i
 ```
 
-You can run the tool locally with Node for development, or link it locally with `npm link` and run the `make-bookmarklet` command directly. Run tests with `npm test` (Vitest). After publishing to npm, users will be able to run it via `npx make-bookmarklet inputfile.js` without installing it globally.
+After publishing to npm, users will be able to run it via `npx make-bookmarklet inputfile.js` without installing it globally. For development and contributor notes (testing, linking, linting, versioning, and release steps) see DEVELOPMENT.md.
 
 ## Use
 

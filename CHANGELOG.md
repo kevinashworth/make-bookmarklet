@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 — YYYY-MM-DD
+## 2.0.0 — 2026-01-20
 
 **BREAKING CHANGES**
 
@@ -12,5 +12,3 @@ Other notable changes:
 
 - Added `bin` entries for `make-bookmarklet` and `unmake-bookmarklet`.
 - Updated README with Node >=20 requirement and `npx` guidance.
-
-(See the 1.x release notes for previous changes.)
