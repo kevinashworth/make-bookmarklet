@@ -1,7 +1,7 @@
-import { test, expect } from 'vitest';
+import { execa } from 'execa';
 import fs from 'fs';
 import path from 'path';
-import { execa } from 'execa';
+import { test, expect } from 'vitest';
 
 const fixturePath = path.join('src', '__tests__', '__fixtures__', 'input', 'whitespace.js');
 
@@ -36,16 +36,16 @@ test('unmake-bookmarklet reads from stdin when piped', async () => {
 test('unmake-bookmarklet runs with relative path and file argument', async () => {
   const { stdout } = await execa('node', ['src/unmake-bookmarklet.js', 'examples/bookmarklets/b1.js']);
   // When run non-interactively (captured stdout), CLI prints the formatted code; assert content is present
-  expect(stdout).toContain("earningsList_rppDD");
+  expect(stdout).toContain('earningsList_rppDD');
 });
 
 test('unmake-bookmarklet runs with ./src path', async () => {
   const { stdout } = await execa('node', ['./src/unmake-bookmarklet.js', 'examples/bookmarklets/b1.js']);
-  expect(stdout).toContain("earningsList_rppDD");
+  expect(stdout).toContain('earningsList_rppDD');
 });
 
 test('unmake-bookmarklet runs with absolute script path', async () => {
   const script = path.resolve('src/unmake-bookmarklet.js');
   const { stdout } = await execa('node', [script, 'examples/bookmarklets/b1.js']);
-  expect(stdout).toContain("earningsList_rppDD");
+  expect(stdout).toContain('earningsList_rppDD');
 });
