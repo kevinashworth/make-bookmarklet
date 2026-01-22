@@ -4,6 +4,7 @@ import chalk from 'chalk';
 import clipboardy from 'clipboardy';
 import { Command } from 'commander';
 import { fileURLToPath } from 'url';
+import path from 'path';
 import prettier from 'prettier';
 
 const { version } = JSON.parse(fs.readFileSync('package.json'));
@@ -98,6 +99,7 @@ export default async function unmakeBookmarklet () {
 }
 
 // Only execute when run directly
-if (fileURLToPath(import.meta.url) === process.argv[1]) {
+const _scriptResolved = process.argv[1] ? path.resolve(process.argv[1]) : undefined;
+if (fileURLToPath(import.meta.url) === _scriptResolved) {
   unmakeBookmarklet();
 }

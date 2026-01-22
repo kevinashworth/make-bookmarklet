@@ -4,6 +4,7 @@ import chalk from 'chalk';
 import clipboardy from 'clipboardy';
 import { Command } from 'commander';
 import { fileURLToPath } from 'url';
+import path from 'path';
 import encodeBookmarklet from './encodeBookmarklet.js';
 import prepareBookmarklet from './prepareBookmarklet.js';
 
@@ -92,6 +93,7 @@ export default function makeBookmarklet () {
 }
 
 // Only execute when run directly
-if (fileURLToPath(import.meta.url) === process.argv[1]) {
+const _scriptResolved = process.argv[1] ? path.resolve(process.argv[1]) : undefined;
+if (fileURLToPath(import.meta.url) === _scriptResolved) {
   makeBookmarklet();
 }
