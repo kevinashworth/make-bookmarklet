@@ -12,3 +12,11 @@ Other notable changes:
 
 - Added `bin` entries for `make-bookmarklet` and `unmake-bookmarklet`.
 - Updated README with Node >=20 requirement and `npx` guidance.
+
+## 2.0.1 — 2026-01-22
+
+**FIXES**
+
+- Tests: made tests more robust; fixed `unmake-bookmarklet` unit test to exercise decode errors instead of mocking `prettier.format`, avoiding fragile tests.
+- Tests: minor mocking, cleanup, and reliability improvements.
+- No functional or CLI behavior changes.
