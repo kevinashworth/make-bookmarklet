@@ -57,7 +57,7 @@ npm run release:dry-run
 
 Further considerations:
 
-- If you want `CHANGELOG.md` committed back to the repo, add `@semantic-release/git` to the plugin list — be careful to avoid CI loops when committing from the workflow.
+- We commit `CHANGELOG.md` automatically using `@semantic-release/git`. The release commit message includes `[skip ci]` to avoid triggering another release workflow run and creating a CI loop.
 - When you're ready to publish to npm, add `@semantic-release/npm` and configure an `NPM_TOKEN` repository secret; update the release job to provide `NPM_TOKEN` to the environment.
 - Consider enforcing Conventional Commits with `commitlint` + `husky` or a CI check to ensure reliable release behavior.
 - Update contributor docs to encourage Conventional Commit style for commit messages.
