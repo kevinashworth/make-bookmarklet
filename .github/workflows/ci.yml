@@ -6,10 +6,6 @@ on:
   pull_request:
     branches: [main]
 
-permissions:
-  contents: write
-  packages: write
-
 jobs:
   test:
     name: Lint & Test
@@ -37,6 +33,9 @@ jobs:
         run: npm test -- --run
 
   release:
+    permissions:
+      contents: write
+      # packages: write # uncomment if decide to publish to npm
     name: Release
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     needs: test
@@ -56,12 +55,13 @@ jobs:
         run: npm ci
 
       - name: Install semantic-release and plugins
-        run: npm install --no-save semantic-release@25 \
-          @semantic-release/commit-analyzer \
-          @semantic-release/release-notes-generator \
-          @semantic-release/changelog \
-          @semantic-release/git \
-          @semantic-release/github \
+        run: >
+          npm install --no-save semantic-release@25
+          @semantic-release/commit-analyzer
+          @semantic-release/release-notes-generator
+          @semantic-release/changelog
+          @semantic-release/git
+          @semantic-release/github
           conventional-changelog-conventionalcommits
 
       - name: Configure git for release commits
