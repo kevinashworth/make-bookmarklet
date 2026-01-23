@@ -22,10 +22,36 @@ This document is for maintainers and contributors (internal notes).
 - Run linter: `npm run lint` (semistandard). Fix with `npm run lint:fix`.
 
 ## Release & versioning (maintainer flow)
-- Add a short CHANGELOG entry for the release in `CHANGELOG.md`.
-- Bump version: `npm version patch|minor|major` (major for breaking changes; we used v2.0.0 for ESM migration).
-- Push tags and branch: `git push --follow-tags origin <branch>`.
-- Publish to npm (manual): `npm publish` or use your release automation.
+
+We now use `semantic-release` in CI (installed at runtime) to automate version bumps and GitHub releases using Conventional Commits. Key points:
+
+- `semantic-release` runs in CI (runtime install) and determines the next version using Conventional Commits.
+- Releases happen automatically on **push** to `main`; pull requests will not trigger releases.
+- We are **not publishing to npm yet**. The release job creates GitHub releases and tags but does not perform `npm publish`.
+
+Files & configuration:
+
+- `.releaserc.json` — config file (uses the `conventionalcommits` preset and plugins): `@semantic-release/commit-analyzer`, `@semantic-release/release-notes-generator`, `@semantic-release/changelog`, and `@semantic-release/github`.
+- `.github/workflows/ci.yml` — contains a `release` job that:
+  - runs only on pushes to `main` (an `if` guard is used),
+  - depends on the `test` job (so tests/lint must pass),
+  - checks out with `fetch-depth: 0`,
+  - installs `semantic-release` and required plugins at runtime (`npm install --no-save ...`), and
+  - runs `npx semantic-release@latest` using the `GITHUB_TOKEN` provided by GitHub Actions.
+
+Testing & rollout:
+
+- To validate behavior locally or in a branch, run: `npx semantic-release --dry-run` (this will print the decisions without making changes).
+- Monitor the first automated release to verify the GitHub release notes and tags are created as expected.
+
+Further considerations:
+
+- If you want `CHANGELOG.md` committed back to the repo, add `@semantic-release/git` to the plugin list — be careful to avoid CI loops when committing from the workflow.
+- When you're ready to publish to npm, add `@semantic-release/npm` and configure an `NPM_TOKEN` repository secret; update the release job to provide `NPM_TOKEN` to the environment.
+- Consider enforcing Conventional Commits with `commitlint` + `husky` or a CI check to ensure reliable release behavior.
+- Update contributor docs to encourage Conventional Commit style for commit messages.
+
+If you'd like, I can also add a `--dry-run` test step or enable `@semantic-release/git` in a follow-up change.
 
 ## Branching & PR process
 - Use topic branches for features (`kevin/<feature>`). Create PRs against `main` with a clear description and tests. Tag PRs with `breaking` and `semver:major` when appropriate.
