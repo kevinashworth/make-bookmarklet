@@ -45,7 +45,7 @@ Testing & rollout:
 
 ```bash
 # Manual install + dry-run
-npm install --no-save semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/github
+npm install --no-save semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/github
 npx semantic-release --dry-run
 
 # Convenience script (recommended for maintainers)
