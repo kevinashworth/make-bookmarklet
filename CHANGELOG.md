@@ -1,3 +1,11 @@
+## [2.0.2](https://github.com/kevinashworth/make-bookmarklet/compare/v2.0.1...v2.0.2) (2026-01-23)
+
+
+### Bug Fixes
+
+* proper YAML syntax ([afa34e5](https://github.com/kevinashworth/make-bookmarklet/commit/afa34e50e9c6e5759c7fcaf50ef42aa29fa8e65b))
+* update permissions for CI jobs in workflow ([aa37ff6](https://github.com/kevinashworth/make-bookmarklet/commit/aa37ff6af82edd62650ff797fdf101688e737b54))
+
 # Changelog
 
 ## 2.0.0 — 2026-01-20
