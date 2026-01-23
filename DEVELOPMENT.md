@@ -3,7 +3,7 @@
 This document is for maintainers and contributors (internal notes).
 
 ## Requirements
-- Node.js 20 or newer (matches README). You can check with `node --version`.
+- Node.js 22 or newer (matches README). You can check with `node --version`.
 
 ## Local setup
 1. Clone the repo and install dev dependencies: `npm i`.
