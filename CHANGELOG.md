@@ -5,7 +5,7 @@
 **BREAKING CHANGES**
 
 - Migration to ESM: package is now ESM-only (package.json includes `"type": "module"`).
-- Node.js 20 or newer is required (`engines.node` updated to `>=20`).
+- Node.js 22 or newer is required (`engines.node` updated to `>=22`).
 - Tests switched to Vitest and some internals (CLI and modules) now use `import`/`export`.
 
 Other notable changes:

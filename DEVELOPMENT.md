@@ -3,7 +3,7 @@
 This document is for maintainers and contributors (internal notes).
 
 ## Requirements
-- Node.js 20 or newer (matches README). You can check with `node --version`.
+- Node.js 22 or newer (matches README). You can check with `node --version`.
 
 ## Local setup
 1. Clone the repo and install dev dependencies: `npm i`.
@@ -37,7 +37,7 @@ Files & configuration:
   - depends on the `test` job (so tests/lint must pass),
   - checks out with `fetch-depth: 0`,
   - installs `semantic-release` and required plugins at runtime (`npm install --no-save ...`), and
-  - runs `npx semantic-release@latest` using the `GITHUB_TOKEN` provided by GitHub Actions.
+  - runs `npx semantic-release@25` using the `GITHUB_TOKEN` provided by GitHub Actions.
 
 Testing & rollout:
 
@@ -53,6 +53,7 @@ npm run release:dry-run
 ```
 
 - Note: `semantic-release` loads plugins from your environment, so running `npx semantic-release` without the plugins installed will cause a `MODULE_NOT_FOUND` error (e.g., `Cannot find module '@semantic-release/changelog'`). In CI we install the plugins at runtime to avoid adding them as dev dependencies.
+- We pin the semantic-release major in CI and the convenience script (e.g., `semantic-release@25`) to avoid unexpected breaking changes from a future major release. Update the pinned major intentionally when you want to upgrade and verify with `npm run release:dry-run`.
 - Monitor the first automated release to verify the GitHub release notes and tags are created as expected.
 
 Further considerations:

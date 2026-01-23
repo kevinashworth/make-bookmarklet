@@ -110,7 +110,7 @@ Please note, this is not a true reversal or re-creation of any JavaScript that w
 
 ## Install
 
-**Requires Node.js 20 or newer.**
+**Requires Node.js 22 or newer.**
 
 Quick options for end users:
 

@@ -9,13 +9,13 @@
     "unmake-bookmarklet": "src/unmake-bookmarklet.js"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=22"
   },
   "scripts": {
     "lint": "semistandard",
     "lint:fix": "semistandard --fix",
     "test": "vitest",
-    "release:dry-run": "npm install --no-save semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/github && npx semantic-release --dry-run"
+    "release:dry-run": "npm install --no-save semantic-release@25 @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/github && npx semantic-release@25 --dry-run"
   },
   "repository": {
     "type": "git",
