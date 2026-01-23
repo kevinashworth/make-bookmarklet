@@ -1,9 +1,9 @@
-import { test, expect, vi, beforeEach, afterEach } from 'vitest';
+import clipboardy from 'clipboardy';
 import fs from 'fs';
 import path from 'path';
-import prettier from 'prettier';
+import { test, expect, vi, beforeEach, afterEach } from 'vitest';
+
 import unmakeBookmarklet from '../unmake-bookmarklet.js';
-import clipboardy from 'clipboardy';
 import { withTempDirAsync } from './utils/tempDir.js';
 
 // Mock clipboardy globally for these tests
@@ -44,7 +44,7 @@ test('prettier throwing sets non-zero exit and logs error', async () => {
   // Cause decodeURIComponent to throw by writing invalid percent-encoding
   await withTempDirAsync(async (tmpDir) => {
     const tmp = path.join(tmpDir, 'bm.js');
-    fs.writeFileSync(tmp, `javascript:%E0`);
+    fs.writeFileSync(tmp, 'javascript:%E0');
     const origArgv = process.argv;
     process.argv = ['node', 'src/unmake-bookmarklet.js', tmp];
 
