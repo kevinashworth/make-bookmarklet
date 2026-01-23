@@ -15,7 +15,7 @@
     "lint": "semistandard",
     "lint:fix": "semistandard --fix",
     "test": "vitest",
-    "release:dry-run": "npm install --no-save semantic-release@25 @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/github && npx semantic-release@25 --dry-run"
+    "release:dry-run": "npm install --no-save semantic-release@25 @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/github conventional-changelog-conventionalcommits && npx semantic-release@25 --dry-run"
   },
   "repository": {
     "type": "git",
