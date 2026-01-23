@@ -37,7 +37,7 @@ Files & configuration:
   - depends on the `test` job (so tests/lint must pass),
   - checks out with `fetch-depth: 0`,
   - installs `semantic-release` and required plugins at runtime (`npm install --no-save ...`), and
-  - runs `npx semantic-release@latest` using the `GITHUB_TOKEN` provided by GitHub Actions.
+  - runs `npx semantic-release@25` using the `GITHUB_TOKEN` provided by GitHub Actions.
 
 Testing & rollout:
 
