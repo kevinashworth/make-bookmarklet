@@ -41,7 +41,18 @@ Files & configuration:
 
 Testing & rollout:
 
-- To validate behavior locally or in a branch, run: `npx semantic-release --dry-run` (this will print the decisions without making changes).
+- To validate behavior locally or in a branch, first install `semantic-release` and the required plugins temporarily (they are installed in CI by the workflow), or use the convenience npm script added to this repo:
+
+```bash
+# Manual install + dry-run
+npm install --no-save semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/github
+npx semantic-release --dry-run
+
+# Convenience script (recommended for maintainers)
+npm run release:dry-run
+```
+
+- Note: `semantic-release` loads plugins from your environment, so running `npx semantic-release` without the plugins installed will cause a `MODULE_NOT_FOUND` error (e.g., `Cannot find module '@semantic-release/changelog'`). In CI we install the plugins at runtime to avoid adding them as dev dependencies.
 - Monitor the first automated release to verify the GitHub release notes and tags are created as expected.
 
 Further considerations:
