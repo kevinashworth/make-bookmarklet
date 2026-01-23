@@ -56,7 +56,13 @@ jobs:
         run: npm ci
 
       - name: Install semantic-release and plugins
-        run: npm install --no-save semantic-release@25 @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/github
+        run: npm install --no-save semantic-release@25 \
+          @semantic-release/commit-analyzer \
+          @semantic-release/release-notes-generator \
+          @semantic-release/changelog \
+          @semantic-release/git \
+          @semantic-release/github \
+          conventional-changelog-conventionalcommits
 
       - name: Configure git for release commits
         run: |
