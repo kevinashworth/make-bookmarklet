@@ -59,6 +59,38 @@ npm run release:dry-run
 Further considerations:
 
 - We commit `CHANGELOG.md` automatically using `@semantic-release/git`. The release commit message includes `[skip ci]` to avoid triggering another release workflow run and creating a CI loop.
+- To allow the release job to push changelog commits and tags while keeping branch protection (PRs/reviews required), create a machine user (bot account) and generate a Personal Access Token (PAT). Add the token as a repository secret named `RELEASE_PAT` and the release workflow will use it for pushes.
+
+  Bot PAT management (recommended) — key rules:
+
+  - Least privilege: prefer a **fine‑grained PAT** or grant the **minimum scopes** required (e.g., `contents: write`, `pull_requests: write`) rather than the broad legacy `repo` scope. Grant only what the release workflow needs.
+  - Set an expiry: choose a short expiry window (30–90 days) for the PAT and rotate before expiry. Short lifetimes reduce exposure if a secret leaks.
+  - Store secrets securely: add the token in **Settings → Secrets → Actions** as `RELEASE_PAT` (do not commit the token to source).
+  - Optional environment protection: for extra control, attach `RELEASE_PAT` to a GitHub **Environment** that requires manual approval before the workflow can use the secret.
+
+  Rotation & revocation process (safe workflow):
+
+  1. Create a new PAT for the bot account (with the same minimal scopes).
+  2. Update the repository secret `RELEASE_PAT` with the new token.
+  3. Run a dry-run or a test release to verify the new token works (`npm run release:dry-run` or push a test branch and merge a PR).
+  4. After verification, revoke the old PAT from the bot account.
+
+  Monitoring & audits:
+
+  - Periodically review PAT last-used timestamps and Actions logs for unusual activity.
+  - Keep an inventory of active bot PATs and rotate them on a schedule.
+
+  Incident response (if token is compromised):
+
+  1. Revoke the compromised PAT immediately.
+  2. Rotate the secret (`RELEASE_PAT`) with a newly created PAT and re-run verification.
+  3. Audit recent Actions runs and git history for unauthorized changes; revert or delete malicious commits/releases/tags as needed.
+  4. Consider revoking other tokens that may be related and investigate the cause.
+
+  Notes:
+
+  - If you later move this repo under an organization, prefer using a **GitHub App** (installation tokens, auto-rotation, scoped permissions) instead of a PAT where possible.
+  - Keep the bot account credentials separate from personal accounts and document the owner/rotation schedule in the repo's maintainer notes.
 - When you're ready to publish to npm, add `@semantic-release/npm` and configure an `NPM_TOKEN` repository secret; update the release job to provide `NPM_TOKEN` to the environment.
 - Consider enforcing Conventional Commits with `commitlint` + `husky` or a CI check to ensure reliable release behavior.
 - Update contributor docs to encourage Conventional Commit style for commit messages.
