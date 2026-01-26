@@ -1,3 +1,13 @@
+## [2.0.3](https://github.com/kevinashworth/make-bookmarklet/compare/v2.0.2...v2.0.3) (2026-01-26)
+
+
+### Bug Fixes
+
+* test semantic-release workflow ([cbf5f6a](https://github.com/kevinashworth/make-bookmarklet/commit/cbf5f6aecc0a59eb41ef8a76a0488665824c38fd))
+* update CI workflow to use RELEASE_PAT for secure token management ([cd40884](https://github.com/kevinashworth/make-bookmarklet/commit/cd4088463076fe408fb9d22d93724940225a8784))
+* verify semantic-release configuration ([8a2d042](https://github.com/kevinashworth/make-bookmarklet/commit/8a2d04218a86fd2804adefd140743f0c214508af))
+* verify semantic-release configuration ([53e88c1](https://github.com/kevinashworth/make-bookmarklet/commit/53e88c14566ea295c54c19acf86a1c3594efee83))
+
 # Changelog
 
 ## [2.0.2](https://github.com/kevinashworth/make-bookmarklet/compare/v2.0.1...v2.0.2) (2026-01-23)
