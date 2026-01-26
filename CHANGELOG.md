@@ -1,5 +1,12 @@
 # Changelog
 
+# [2.1.0](https://github.com/kevinashworth/make-bookmarklet/compare/v2.0.3...v2.1.0) (2026-01-26)
+
+
+### Features
+
+* add @semantic-release/npm plugin and update changelog structure ([684ad82](https://github.com/kevinashworth/make-bookmarklet/commit/684ad828a576389407bcf2c3616e2020b20bac1d))
+
 ## [2.0.3](https://github.com/kevinashworth/make-bookmarklet/compare/v2.0.2...v2.0.3) (2026-01-26)
 
 ### Bug Fixes
