@@ -9,19 +9,19 @@
 
 ## Use
 
-To run `make-bookmarklet`, the recommended approach is via `npx` (no install required): `npx make-bookmarklet inputfile.js`. Alternatively you can install globally with `npm install -g make-bookmarklet` and run `make-bookmarklet inputfile.js`, or run locally for development: `node src/make-bookmarklet inputfile.js`. See the **Install** section at the end of this README for installation details and links to development notes.
+To run `make-bookmarklet`, the recommended approach is via `npx` (no install required): `npx make-bookmarklet inputfile.js`.
 
-```bash
-node src/make-bookmarklet inputfile.js
-```
+`make-bookmarklet` creates a bookmarklet out of the JavaScript in `inputfile.js`. It outputs the new bookmarklet to the command line and also copies the new bookmarklet to the clipboard.
+
+### Additional details
+
+Alternatively you can install globally with `npm install -g make-bookmarklet` and run `make-bookmarklet inputfile.js`, or run locally for development: `node src/make-bookmarklet inputfile.js`. See the **Install** section at the end of this README for installation details and links to development notes.
 
 Piping and stdout examples:
 
 - Pipe an input script into the CLI: `cat script.js | npx make-bookmarklet`
 - Write output to a file using shell redirection: `npx make-bookmarklet inputfile.js > out.txt`
 - Disable clipboard copying when scripting: `npx make-bookmarklet inputfile.js --no-clipboard > out.txt`
-
-This creates a bookmarklet out of the JavaScript in `inputfile.js`. It outputs the new bookmarklet to the command line and also copies the new bookmarklet to the clipboard.
 
 For some ideas on what goes into an input file, see the [examples](examples) folder or see below. I often use an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE), but you can see [the Shortwave folder](examples/shortwave) for a non-IIFE example. Typically I test out the code by pasting it into my browser console. Once it works to my liking there, I convert it to a bookmarklet.
 
