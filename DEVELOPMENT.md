@@ -14,10 +14,6 @@ This document is for maintainers and contributors (internal notes).
 - Merge PR to `main` (CI runs tests, then release job if a release is needed)
 - Verify: check Actions, GitHub Releases, tags, and `CHANGELOG.md`
 
-## Requirements
-
-- Node.js 22 or newer (matches README). You can check with `node --version`.
-
 ## Local setup
 
 1. Clone the repo and install dev dependencies: `npm i`.
