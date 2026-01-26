@@ -1,10 +1,11 @@
 # make-bookmarklet
 
 ## Table of Contents
-* [Use](#use)
-* [Options](#options)
-* [Unmake / Reversal](#unmake--reversal)
-* [Install](#install)
+
+- [Use](#use)
+- [Options](#options)
+- [Unmake / Reversal](#unmake--reversal)
+- [Install](#install)
 
 ## Use
 
@@ -27,6 +28,7 @@ For some ideas on what goes into an input file, see the [examples](examples) fol
 ### A complete, simple example
 
 So, given `inputfile.js` in the top directory of this repo
+
 ```javascript
 h = window.location.href;
 i = h.indexOf('imdb.com');
@@ -52,7 +54,8 @@ else if (p === -1) {
 ```
 
 then, running `node src/make-bookmarklet inputfile.js` yields:
-```
+
+```javascript
 javascript:var%20h=window.location.href;%20const%20i=h.indexOf('imdb.com');%20const%20p=h.indexOf('https://pro.imdb.com');%20const%20t=h.indexOf('title');%20const%20c=h.indexOf('combined');%20const%20f=h.indexOf('fullcredits');%20const%20r=h.indexOf('reference');%20const%20badword=Math.max(c,%20f,%20r);%20if%20(i===-1)%7Bwindow.location='https://pro.imdb.com/name/nm2825198/';%7Delse%20if%20(p===0)%7Bwindow.location=h.replace('https://pro',%20'https://www');%7Delse%20if%20(p===-1)%7Bif%20((t%3E1)%20&&%20(badword%3E1))%7Bh=h.substring(0,%20badword);%7Dwindow.location=h.replace(/https:%5C/%5C/%5Ba-z%5D+/,%20'https://pro');%20%7D
 ```
 
@@ -86,7 +89,6 @@ To see more of the make process printed to the console, use the `--debug` (or `-
 node src/make-bookmarklet.js inputfile.js -d
 ```
 
-
 ### **-h** Help
 
 To get help for these programs, and to see more examples, run:
@@ -94,7 +96,6 @@ To get help for these programs, and to see more examples, run:
 ```bash
 node src/make-bookmarklet.js --help
 ```
-
 
 Please note that any `options` can go before or after `filename`.
 
@@ -109,8 +110,6 @@ node src/unmake-bookmarklet bookmarklet.js
 Please note, this is not a true reversal or re-creation of any JavaScript that went in to creating a bookmarklet, but it does convert a hard-to-read bookmarklet into [`prettier`](https://prettier.io) code.
 
 ## Install
-
-**Requires Node.js 22 or newer.**
 
 Quick options for end users:
 

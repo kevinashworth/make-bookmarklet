@@ -2,23 +2,40 @@
 
 This document is for maintainers and contributors (internal notes).
 
+## Quick checklist (short)
+
+- Create a branch: `git checkout -b my/feature`
+- Do work and commit using Conventional Commits (e.g., `feat:`, `fix:`)
+- Lint: `npm run lint`
+- Lint: `markdownlint --ignore node_modules **/*.md`
+- Test: `npm test -- --run`
+- Dry-run release: `npm run release:dry-run` (verifies semantic-release decisions)
+- Push branch, open a PR against `main`, get 1 approval and wait for checks to pass
+- Merge PR to `main` (CI runs tests, then release job if a release is needed)
+- Verify: check Actions, GitHub Releases, tags, and `CHANGELOG.md`
+
 ## Requirements
+
 - Node.js 22 or newer (matches README). You can check with `node --version`.
 
 ## Local setup
+
 1. Clone the repo and install dev dependencies: `npm i`.
 2. Link the package locally for CLI testing: `npm link`.
 
 ## Running the CLI locally
+
 - Run the CLI directly with node: `node src/make-bookmarklet.js <input-file>` or `node src/unmake-bookmarklet.js <input-file>`.
 - After `npm link`, run `make-bookmarklet <input-file>` or `unmake-bookmarklet <input-file>`.
 
 ## Testing
+
 - Run unit tests: `npm test` (Vitest is used).
 - Add tests under `src/__tests__`. Use ESM `import` syntax and add CLI tests that use `execa`.
 - Mock clipboardy in tests (example with Vitest: `vi.mock('clipboardy', () => ({ default: { writeSync: () => {}, write: async () => {} } }))`).
 
 ## Linting
+
 - Run linter: `npm run lint` (semistandard). Fix with `npm run lint:fix`.
 
 ## Release & versioning (maintainer flow)
@@ -91,17 +108,16 @@ Further considerations:
 
   - If you later move this repo under an organization, prefer using a **GitHub App** (installation tokens, auto-rotation, scoped permissions) instead of a PAT where possible.
   - Keep the bot account credentials separate from personal accounts and document the owner/rotation schedule in the repo's maintainer notes.
+
 - When you're ready to publish to npm, add `@semantic-release/npm` and configure an `NPM_TOKEN` repository secret; update the release job to provide `NPM_TOKEN` to the environment.
 - Consider enforcing Conventional Commits with `commitlint` + `husky` or a CI check to ensure reliable release behavior.
 - Update contributor docs to encourage Conventional Commit style for commit messages.
 
-If you'd like, I can also add a `--dry-run` test step or enable `@semantic-release/git` in a follow-up change.
-
 ## Branching & PR process
+
 - Use topic branches for features (`kevin/<feature>`). Create PRs against `main` with a clear description and tests. Tag PRs with `breaking` and `semver:major` when appropriate.
 
 ## Notes
+
 - The codebase is ESM-only (`package.json` `type: module`). Keep imports using `.js` for local module paths (e.g., `import foo from './foo.js'`).
 - CLI entrypoints preserve the shebangs and are listed under `bin` in `package.json`.
-
-If you want additional developer instructions added (build steps, CI workflows, or release automation), tell me where to add them and I’ll draft them.
