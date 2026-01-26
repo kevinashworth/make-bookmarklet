@@ -23,7 +23,11 @@ Piping and stdout examples:
 - Write output to a file using shell redirection: `npx make-bookmarklet inputfile.js > out.txt`
 - Disable clipboard copying when scripting: `npx make-bookmarklet inputfile.js --no-clipboard > out.txt`
 
-For some ideas on what goes into an input file, see the [examples](examples) folder or see below. I often use an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE), but you can see [the Shortwave folder](examples/shortwave) for a non-IIFE example. Typically I test out the code by pasting it into my browser console. Once it works to my liking there, I convert it to a bookmarklet.
+## What would I want to use this for?
+
+For some ideas on what goes into an input file, see the [examples](examples) folder or see below. I often use an [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE), but you can see [the Shortwave folder](examples/shortwave) for a non-IIFE example. (RIP Shortwave.)
+
+Typically I test the output code in my browser console. Once it works to my liking there, I convert it to a bookmarklet in my browser's most-convenient bookmark folder.
 
 ### A complete, simple example
 
