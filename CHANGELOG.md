@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.1](https://github.com/kevinashworth/make-bookmarklet/compare/v2.1.0...v2.1.1) (2026-06-03)
+
+
+### Bug Fixes
+
+* **deps:** remediate npm audit vulnerabilities ([108e3c5](https://github.com/kevinashworth/make-bookmarklet/commit/108e3c5402082914f4e79dcf07e5b5931556f4b1))
+
 # [2.1.0](https://github.com/kevinashworth/make-bookmarklet/compare/v2.0.3...v2.1.0) (2026-01-26)
 
 
