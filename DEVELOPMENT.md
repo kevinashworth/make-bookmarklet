@@ -7,7 +7,8 @@ This document is for maintainers and contributors (internal notes).
 - Create a branch: `git checkout -b my/feature`
 - Do work and commit using Conventional Commits (e.g., `feat:`, `fix:`)
 - Lint: `npm run lint`
-- Lint: `markdownlint --ignore node_modules **/*.md`
+- Lint: `npm run lint:md`
+- Fix markdownlint issues: `npm run lint:md:fix`
 - Test: `npm test -- --run`
 - Dry-run release: `npm run release:dry-run` (verifies semantic-release decisions)
 - Push branch, open a PR against `main`, get 1 approval and wait for checks to pass
