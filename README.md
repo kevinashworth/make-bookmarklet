@@ -20,7 +20,7 @@ You need [Node.js](https://nodejs.org/). Node.js includes `npm`, which you'll us
 
 Clone this repository, install dependencies, and run the tool on a script.
 
-```
+```bash
 git clone https://github.com/kevinashworth/make-bookmarklet.git
 cd make-bookmarklet
 npm install
@@ -34,7 +34,7 @@ alert('Hello from a bookmarklet!');
 
 Convert it:
 
-```
+```bash
 node src/make-bookmarklet.js examples/hello.js
 ```
 
@@ -50,7 +50,7 @@ Then save it as a bookmarklet in your browser. One way to create a bookmarklet: 
 
 Run the tool on a JavaScript file:
 
-```
+```bash
 node src/make-bookmarklet.js inputfile.js
 ```
 
@@ -156,7 +156,7 @@ Please note, this is not a true reversal or re-creation of any JavaScript that w
 
 Clone this repo and install dependencies:
 
-```
+```bash
 git clone https://github.com/kevinashworth/make-bookmarklet.git
 cd make-bookmarklet
 npm install
@@ -164,7 +164,7 @@ npm install
 
 Then run with:
 
-```
+```bash
 node src/make-bookmarklet.js inputfile.js
 ```
 
