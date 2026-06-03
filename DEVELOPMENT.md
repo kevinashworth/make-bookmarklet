@@ -10,7 +10,8 @@ This document is for maintainers and contributors (internal notes).
 - Lint: `npm run lint:md`
 - Fix markdownlint issues: `npm run lint:md:fix`
 - Test: `npm test -- --run`
-- Dry-run release: `npm run release:dry-run` (verifies semantic-release decisions)
+- Dry-run release (main branch, CI-like): `npm run release:dry-run:main`
+- Dry-run release (feature branch prediction): `npm run release:dry-run:feature`
 - Push branch, open a PR against `main`, get 1 approval and wait for checks to pass
 - Merge PR to `main` (CI runs tests, then release job if a release is needed)
 - Verify: check Actions, GitHub Releases, tags, and `CHANGELOG.md`
@@ -64,13 +65,17 @@ Testing & rollout:
 npm install --no-save semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/github
 GITHUB_TOKEN="$RELEASE_PAT" npx semantic-release --dry-run
 
-# Convenience script (recommended for maintainers)
+# Convenience scripts (recommended for maintainers)
 npm run release:dry-run
+npm run release:dry-run:main
+npm run release:dry-run:feature
 ```
 
 - Note: `semantic-release` loads plugins from your environment, so running `npx semantic-release` without the plugins installed will cause a `MODULE_NOT_FOUND` error (e.g., `Cannot find module '@semantic-release/changelog'`). In CI we install the plugins at runtime to avoid adding them as dev dependencies.
-- Note: `semantic-release` reads `GITHUB_TOKEN` or `GH_TOKEN`, so the convenience script maps `RELEASE_PAT` into those names for local dry-runs. If you run the manual command, export `GITHUB_TOKEN` yourself or prefix it as shown above.
-- We pin the semantic-release major in CI and the convenience script (e.g., `semantic-release@25`) to avoid unexpected breaking changes from a future major release. Update the pinned major intentionally when you want to upgrade and verify with `npm run release:dry-run`.
+- Note: `release:dry-run:main` mirrors CI behavior and requires local auth for `@semantic-release/github`. It maps `RELEASE_PAT` to `GITHUB_TOKEN`/`GH_TOKEN` automatically, but one of those variables must be set.
+- Note: `release:dry-run:feature` is intentionally token-free and performs local commit analysis (Conventional Commits) to estimate release impact from a feature branch before opening/merging a PR.
+- Implementation note: release dry-run command logic lives in `scripts/release-dry-run-main.sh`, `scripts/release-dry-run-feature.sh`, and `scripts/release-dry-run-feature.mjs` to keep `package.json` scripts short and maintainable.
+- We pin the semantic-release major in CI and convenience scripts (e.g., `semantic-release@25`) to avoid unexpected breaking changes from a future major release. Update the pinned major intentionally when you want to upgrade and verify with `npm run release:dry-run:main`.
 - Monitor the first automated release to verify the GitHub release notes and tags are created as expected.
 
 Further considerations:
