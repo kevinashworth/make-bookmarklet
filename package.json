@@ -17,7 +17,9 @@
     "lint:md": "markdownlint .",
     "lint:md:fix": "markdownlint --fix .",
     "test": "vitest",
-    "release:dry-run": "npm install --no-save semantic-release@25 @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/github conventional-changelog-conventionalcommits && GITHUB_TOKEN=${GITHUB_TOKEN:-${RELEASE_PAT:-$GH_TOKEN}} GH_TOKEN=${GH_TOKEN:-${GITHUB_TOKEN:-$RELEASE_PAT}} npx semantic-release@25 --dry-run"
+    "release:dry-run": "npm run release:dry-run:main",
+    "release:dry-run:main": "sh ./scripts/release-dry-run-main.sh",
+    "release:dry-run:feature": "sh ./scripts/release-dry-run-feature.sh"
   },
   "repository": {
     "type": "git",
