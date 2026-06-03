@@ -34,6 +34,8 @@ This document is for maintainers and contributors (internal notes).
 ## Linting
 
 - Run linter: `npm run lint` (semistandard). Fix with `npm run lint:fix`.
+- Run Markdown linter: `npm run lint:md`. Auto-fix supported Markdown issues with `npm run lint:md:fix`.
+- Note: `npm run lint:md:fix` only fixes rules that `markdownlint-cli` can safely rewrite. Any issues still reported after that command require manual changes.
 
 ## Release & versioning (maintainer flow)
 
