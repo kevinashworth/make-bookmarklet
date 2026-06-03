@@ -59,13 +59,14 @@ Testing & rollout:
 ```bash
 # Manual install + dry-run
 npm install --no-save semantic-release @semantic-release/commit-analyzer @semantic-release/release-notes-generator @semantic-release/changelog @semantic-release/git @semantic-release/github
-npx semantic-release --dry-run
+GITHUB_TOKEN="$RELEASE_PAT" npx semantic-release --dry-run
 
 # Convenience script (recommended for maintainers)
 npm run release:dry-run
 ```
 
 - Note: `semantic-release` loads plugins from your environment, so running `npx semantic-release` without the plugins installed will cause a `MODULE_NOT_FOUND` error (e.g., `Cannot find module '@semantic-release/changelog'`). In CI we install the plugins at runtime to avoid adding them as dev dependencies.
+- Note: `semantic-release` reads `GITHUB_TOKEN` or `GH_TOKEN`, so the convenience script maps `RELEASE_PAT` into those names for local dry-runs. If you run the manual command, export `GITHUB_TOKEN` yourself or prefix it as shown above.
 - We pin the semantic-release major in CI and the convenience script (e.g., `semantic-release@25`) to avoid unexpected breaking changes from a future major release. Update the pinned major intentionally when you want to upgrade and verify with `npm run release:dry-run`.
 - Monitor the first automated release to verify the GitHub release notes and tags are created as expected.
 
