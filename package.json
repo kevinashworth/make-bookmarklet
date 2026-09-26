@@ -14,8 +14,8 @@
   "scripts": {
     "lint": "semistandard",
     "lint:fix": "semistandard --fix",
-    "lint:md": "markdownlint .",
-    "lint:md:fix": "markdownlint --fix .",
+    "lint:md": "markdownlint-cli2 .",
+    "lint:md:fix": "markdownlint-cli2 --fix .",
     "test": "vitest",
     "release:dry-run": "npm run release:dry-run:main",
     "release:dry-run:main": "sh ./scripts/release-dry-run-main.sh",
@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "execa": "9.6.1",
-    "markdownlint-cli": "0.48.0",
+    "markdownlint-cli2": "0.23.2",
     "semistandard": "17.0.0",
     "vitest": "4.1.7"
   },
