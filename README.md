@@ -148,7 +148,7 @@ To convert a bookmarklet back into more-readable code, run the `unmake` version:
 node src/unmake-bookmarklet.js bookmarklet.js
 ```
 
-Please note, this is not a true reversal or re-creation of any JavaScript that went in to creating a bookmarklet, but it does convert a hard-to-read bookmarklet into [`prettier`](https://prettier.io) code.
+Please note, this is not a true reversal or re-creation of any JavaScript that went in to creating a bookmarklet, but it does convert a hard-to-read bookmarklet into formatted code.
 
 ## Install
 

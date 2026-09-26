@@ -10,7 +10,6 @@ This document is for maintainers and contributors (internal notes).
 - Lint: `npm run lint:md`
 - Fix markdownlint issues: `npm run lint:md:fix`
 - Test: `npm test -- --run`
-- Dry-run release (main branch, CI-like): `npm run release:dry-run:main`
 - Dry-run release (feature branch prediction): `npm run release:dry-run:feature`
 - Push branch, open a PR against `main`, get 1 approval and wait for checks to pass
 - Merge PR to `main` (CI runs tests, then release job if a release is needed)
@@ -34,17 +33,19 @@ This document is for maintainers and contributors (internal notes).
 
 ## Linting
 
-- Run linter: `npm run lint` (semistandard). Fix with `npm run lint:fix`.
+- Run oxc linter: `npm run lint`. Fix with `npm run lint:fix`.
 - Run Markdown linter: `npm run lint:md`. Auto-fix supported Markdown issues with `npm run lint:md:fix`.
-- Note: `npm run lint:md:fix` only fixes rules that `markdownlint-cli` can safely rewrite. Any issues still reported after that command require manual changes.
+- Note: `npm run lint:md:fix` only fixes rules that `markdownlint-cli2` can safely rewrite. Any issues still reported after that command require manual changes.
 
 ## Release & versioning (maintainer flow)
+
+Ensure RELEASE_PAT is ready. See notes below or the uncommitted markdown note.
 
 We now use `semantic-release` in CI (installed at runtime) to automate version bumps and GitHub releases using Conventional Commits. Key points:
 
 - `semantic-release` runs in CI (runtime install) and determines the next version using Conventional Commits.
 - Releases happen automatically on **push** to `main`; pull requests will not trigger releases.
-- We are **not publishing to npm yet**. The release job creates GitHub releases and tags but does not perform `npm publish`.
+- We are **not publishing to npm**. The release job creates GitHub releases and tags but does not perform `npm publish`.
 
 Files & configuration:
 
@@ -114,7 +115,6 @@ Further considerations:
   - If you later move this repo under an organization, prefer using a **GitHub App** (installation tokens, auto-rotation, scoped permissions) instead of a PAT where possible.
   - Keep the bot account credentials separate from personal accounts and document the owner/rotation schedule in the repo's maintainer notes.
 
-- When you're ready to publish to npm, add `@semantic-release/npm` and configure an `NPM_TOKEN` repository secret; update the release job to provide `NPM_TOKEN` to the environment.
 - Consider enforcing Conventional Commits with `commitlint` + `husky` or a CI check to ensure reliable release behavior.
 - Update contributor docs to encourage Conventional Commit style for commit messages.
 
