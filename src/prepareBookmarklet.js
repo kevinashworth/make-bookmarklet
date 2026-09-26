@@ -6,7 +6,7 @@
  * @returns prepared JavaScript
  */
 
-function prepareBookmarklet (
+function prepareBookmarklet(
   source,
   options = { aggressive: false, component: false, debug: false }
 ) {

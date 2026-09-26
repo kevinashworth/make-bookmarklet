@@ -41,7 +41,7 @@ node src/make-bookmarklet.js examples/hello.js
 You'll see output like this (and it's also automatically copied to your clipboard):
 
 ```javascript
-javascript:alert('Hello%20from%20a%20bookmarklet!');
+javascript: alert('Hello%20from%20a%20bookmarklet!');
 ```
 
 Then save it as a bookmarklet in your browser. One way to create a bookmarklet: bookmark any page, then edit that bookmark and paste the string (already on your clipboard) into the URL field. Click your new bookmarklet on any page to run the code.
@@ -83,17 +83,15 @@ r = h.indexOf('reference');
 badword = Math.max(c, f, r);
 
 if (i === -1) {
-  window.location = 'https://pro.imdb.com/name/nm2825198/'
-}
-else if (p === 0) {
-  window.location = h.replace('https://pro', 'https://www')
-}
-else if (p === -1) {
-  if ((t > 1) && (badword > 1)) {
-    h = h.substring(0, badword)
+  window.location = 'https://pro.imdb.com/name/nm2825198/';
+} else if (p === 0) {
+  window.location = h.replace('https://pro', 'https://www');
+} else if (p === -1) {
+  if (t > 1 && badword > 1) {
+    h = h.substring(0, badword);
   }
   window.location = h.replace(/https:\/\/[a-z]+/, 'https://pro');
-};
+}
 ```
 
 then, running `node src/make-bookmarklet.js inputfile.js` yields:
@@ -114,7 +112,7 @@ JavaScript engines are very forgiving. So it can be safe to remove some JavaScri
 node src/make-bookmarklet.js inputfile.js --aggressive
 ```
 
-The removals here go against best coding practices, but here's an opinion: it will probably not matter to your bookmarklet. So this is your warning — *Not declaring variables will pollute the global scope. The implied use of `window` may cause rare problems. Perhaps your code truly relies on `===` not `==`. Gasp. Take your chances!*
+The removals here go against best coding practices, but here's an opinion: it will probably not matter to your bookmarklet. So this is your warning — **Not declaring variables will pollute the global scope. The implied use of `window` may cause rare problems. Perhaps your code truly relies on `===` not `==`. Gasp. Take your chances!**
 
 ### **-c** Use encodeURIComponent
 

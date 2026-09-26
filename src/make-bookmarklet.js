@@ -8,7 +8,7 @@ import path from 'path';
 import encodeBookmarklet from './encodeBookmarklet.js';
 import prepareBookmarklet from './prepareBookmarklet.js';
 
-export default function makeBookmarklet () {
+export default function makeBookmarklet() {
   const { version } = JSON.parse(fs.readFileSync('package.json'));
   const error = chalk.bold.red;
   const success = chalk.bold.green;

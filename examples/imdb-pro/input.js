@@ -3,11 +3,14 @@
 // Note: site_preference can only be used on Pro URLs.
 
 (function () {
-  const x = window.innerWidth || document.documentElement.clientWidth || document.getElementsByTagName('body')[0].clientWidth;
+  const x =
+    window.innerWidth ||
+    document.documentElement.clientWidth ||
+    document.getElementsByTagName('body')[0].clientWidth;
   const bp = 400;
   const hr = window.location.href;
   const nh = new URL(hr);
-  let u = (nh.origin + nh.pathname);
+  let u = nh.origin + nh.pathname;
   // Now u is a clean version of URL, without query params, etc.
 
   // 1. If not on IMDb at all, go to desired IMDbPro home URL.

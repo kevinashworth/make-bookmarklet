@@ -15,7 +15,7 @@ export function withTempDir (fn) {
       // Best-effort cleanup: warn on failure but do not fail the test
       try {
         console.warn(`Temp cleanup failed for ${tmpDir}: ${e && (e.message || e)}`);
-      } catch (logErr) {
+      } catch {
         // ignore logging errors
       }
     }
@@ -33,7 +33,7 @@ export async function withTempDirAsync (fn) {
       // Best-effort cleanup: warn on failure but do not fail the test
       try {
         console.warn(`Temp cleanup failed for ${tmpDir}: ${e && (e.message || e)}`);
-      } catch (logErr) {
+      } catch {
         // ignore logging errors
       }
     }

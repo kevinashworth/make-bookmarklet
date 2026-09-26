@@ -5,20 +5,21 @@ import clipboardy from 'clipboardy';
 import { Command } from 'commander';
 import { fileURLToPath } from 'url';
 import path from 'path';
-import prettier from 'prettier';
+import { format } from 'oxfmt';
 
 const { version } = JSON.parse(fs.readFileSync('package.json'));
 const error = chalk.bold.red;
 const success = chalk.bold.green;
 const verbose = chalk.bold.yellow;
 
-export default async function unmakeBookmarklet () {
+export default async function unmakeBookmarklet() {
   const program = new Command();
   let filename;
   program.arguments('[filename]').action((results) => {
     filename = results;
   });
-  program.option('-d, --debug', 'verbose output to the command line')
+  program
+    .option('-d, --debug', 'verbose output to the command line')
     .option('--no-clipboard', 'do not copy output to clipboard');
   program.on('--help', () => {
     console.log('');
@@ -65,8 +66,7 @@ export default async function unmakeBookmarklet () {
     bookmarklet = source.replace(/^\s?javascript:/gm, '');
     bookmarklet = decodeURIComponent(bookmarklet);
 
-    const formatted = await prettier.format(bookmarklet, {
-      parser: 'babel',
+    const { code: formatted } = await format('bookmarklet.js', bookmarklet, {
       singleQuote: true,
       trailingComma: 'none'
     });
@@ -75,7 +75,7 @@ export default async function unmakeBookmarklet () {
     if (!stdoutIsTTY && !options.debug) {
       console.log(formatted);
     } else {
-      console.log(success('// decoded and prettier bookmarklet'));
+      console.log(success('// decoded and formatted bookmarklet'));
       console.log(formatted);
     }
 
