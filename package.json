@@ -16,6 +16,7 @@
     "lint:fix": "semistandard --fix",
     "lint:md": "markdownlint-cli2 .",
     "lint:md:fix": "markdownlint-cli2 --fix .",
+    "check:shell": "shellcheck ./scripts/*.sh",
     "test": "vitest",
     "release:dry-run": "npm run release:dry-run:main",
     "release:dry-run:main": "sh ./scripts/release-dry-run-main.sh",
