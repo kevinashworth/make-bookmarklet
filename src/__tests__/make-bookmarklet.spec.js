@@ -8,6 +8,18 @@ describe('prepareBookmarklet / encodeBookmarklet', () => {
       const { input, output } = getIO('comments-inline.js');
       expect(prepareBookmarklet(input)).toEqual(output);
     });
+    it('Preserves slashes inside strings and regular expressions', () => {
+      const input = [
+        "p = h.indexOf('https://pro.imdb.com');",
+        "window.location = h.replace(/https:\\/\\/[a-z]+/, 'https://pro');",
+      ].join('\n');
+      const prepared = prepareBookmarklet(input);
+
+      expect(prepared).toBe(
+        "p=h.indexOf('https://pro.imdb.com');window.location=h.replace(/https:\\/\\/[a-z]+/,'https://pro');"
+      );
+      expect(() => new Function(prepared)).not.toThrow();
+    });
     it('Removes commented-out lines', () => {
       const { input, output } = getIO('comment-lines.js');
       expect(prepareBookmarklet(input)).toEqual(output);
@@ -25,6 +37,10 @@ describe('prepareBookmarklet / encodeBookmarklet', () => {
       expect(
         encodeBookmarklet(prepareBookmarklet(input), { component: true })
       ).toEqual(output);
+    });
+    it('Does not remove a non-comment double slash', () => {
+      const { input, output } = getIO('comment-gotchas.js');
+      expect(prepareBookmarklet(input)).not.toEqual(output);
     });
   });
   describe('Handles whitespace', () => {
