@@ -7,15 +7,15 @@
     "Node",
     "bookmarklet"
   ],
-  "homepage": "https://github.com/kevinashworth/make-bookmarklet#readme",
+  "homepage": "https://github.com/Kevin-Ashworth/make-bookmarklet#readme",
   "bugs": {
-    "url": "https://github.com/kevinashworth/make-bookmarklet/issues"
+    "url": "https://github.com/Kevin-Ashworth/make-bookmarklet/issues"
   },
   "license": "MIT",
   "author": "Kevin Ashworth",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kevinashworth/make-bookmarklet.git"
+    "url": "git+https://github.com/Kevin-Ashworth/make-bookmarklet.git"
   },
   "bin": {
     "make-bookmarklet": "src/make-bookmarklet.js",

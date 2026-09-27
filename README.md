@@ -21,7 +21,7 @@ You need [Node.js](https://nodejs.org/). Node.js includes `npm`, which you'll us
 Clone this repository, install dependencies, and run the tool on a script.
 
 ```bash
-git clone https://github.com/kevinashworth/make-bookmarklet.git
+git clone https://github.com/Kevin-Ashworth/make-bookmarklet.git
 cd make-bookmarklet
 npm install
 ```
@@ -155,7 +155,7 @@ Please note, this is not a true reversal or re-creation of any JavaScript that w
 Clone this repo and install dependencies:
 
 ```bash
-git clone https://github.com/kevinashworth/make-bookmarklet.git
+git clone https://github.com/Kevin-Ashworth/make-bookmarklet.git
 cd make-bookmarklet
 npm install
 ```
