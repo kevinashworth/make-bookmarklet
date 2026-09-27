@@ -35,7 +35,8 @@ jobs:
   release:
     permissions:
       contents: write
-      # packages: write # uncomment if decide to publish to npm
+      issues: write
+      pull-requests: write
     name: Release
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     needs: test
