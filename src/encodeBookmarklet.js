@@ -6,7 +6,7 @@
  * @returns bookmarklet
  */
 
-function encodeBookmarklet (
+function encodeBookmarklet(
   source,
   options = { aggressive: false, component: false, debug: false }
 ) {

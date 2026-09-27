@@ -6,11 +6,11 @@ import semver from 'semver';
 const require = createRequire(import.meta.url);
 const { analyzeCommits } = require('@semantic-release/commit-analyzer');
 
-function run (cmd) {
+function run(cmd) {
   return execSync(cmd, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] }).trim();
 }
 
-function getLastTag () {
+function getLastTag() {
   try {
     return run('git describe --tags --abbrev=0');
   } catch {
@@ -18,7 +18,7 @@ function getLastTag () {
   }
 }
 
-function getCommits (range) {
+function getCommits(range) {
   const format = '%H%x1f%B%x1e';
   const output = run(`git log ${range} --pretty=format:${format}`);
 
@@ -38,7 +38,7 @@ function getCommits (range) {
     .filter((commit) => commit.message.length > 0);
 }
 
-function getCurrentVersion () {
+function getCurrentVersion() {
   const pkg = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
   return pkg.version;
 }
@@ -58,8 +58,8 @@ const releaseType = await analyzeCommits(
   {
     commits,
     logger: {
-      log: () => { },
-      error: () => { }
+      log: () => {},
+      error: () => {}
     }
   }
 );
@@ -77,4 +77,6 @@ if (nextVersion) {
   console.log(`Prediction: ${releaseType} release.`);
 }
 
-console.log(lastTag ? `Analyzed commits since ${lastTag}.` : 'Analyzed full commit history (no tag found).');
+console.log(
+  lastTag ? `Analyzed commits since ${lastTag}.` : 'Analyzed full commit history (no tag found).'
+);

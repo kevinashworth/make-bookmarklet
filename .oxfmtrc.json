@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 100,
+  "singleQuote": true,
+  "trailingComma": "none",
+  "ignorePatterns": [
+    ".github/workflows/ci.yml",
+    "CHANGELOG.md",
+    "examples/archive/",
+    "examples/bookmarklets/",
+    "examples/imdb-pro/archive/",
+    "examples/imdb-pro/output.js",
+    "examples/shortwave/sw.js",
+    "src/__tests__/__fixtures__/",
+    "src/__tests__/"
+  ]
+}

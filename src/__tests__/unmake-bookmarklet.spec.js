@@ -75,7 +75,7 @@ test('debug flag prints debug markers', async () => {
       await unmakeBookmarklet();
       const allLogs = logSpy.mock.calls.flat().join('\n');
       expect(allLogs).toMatch(/\[debug\] input/);
-      expect(allLogs).toMatch(/decoded and prettier bookmarklet/);
+      expect(allLogs).toMatch(/decoded and formatted bookmarklet/);
     } finally {
       process.argv = origArgv;
       logSpy.mockRestore();
