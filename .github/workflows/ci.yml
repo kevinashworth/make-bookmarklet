@@ -45,7 +45,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v5
         with:
-          token: ${{ secrets.RELEASE_PAT }}
+          token: ${{ github.token }}
           fetch-depth: 0
           persist-credentials: true
 
@@ -75,5 +75,5 @@ jobs:
 
       - name: Run semantic-release
         env:
-          GITHUB_TOKEN: ${{ secrets.RELEASE_PAT }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: npx semantic-release@25
