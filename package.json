@@ -31,10 +31,7 @@
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "check:shell": "shellcheck ./scripts/*.sh",
-    "test": "vitest",
-    "release:dry-run": "npm run release:dry-run:main",
-    "release:dry-run:main": "sh ./scripts/release-dry-run-main.sh",
-    "release:dry-run:feature": "sh ./scripts/release-dry-run-feature.sh"
+    "test": "vitest"
   },
   "dependencies": {
     "chalk": "5.6.2",
