@@ -97,7 +97,7 @@ if (i === -1) {
 then, running `node src/make-bookmarklet.js inputfile.js` yields:
 
 ```javascript
-javascript:var%20h=window.location.href;%20const%20i=h.indexOf('imdb.com');%20const%20p=h.indexOf('https://pro.imdb.com');%20const%20t=h.indexOf('title');%20const%20c=h.indexOf('combined');%20const%20f=h.indexOf('fullcredits');%20const%20r=h.indexOf('reference');%20const%20badword=Math.max(c,%20f,%20r);%20if%20(i===-1)%7Bwindow.location='https://pro.imdb.com/name/nm2825198/';%7Delse%20if%20(p===0)%7Bwindow.location=h.replace('https://pro',%20'https://www');%7Delse%20if%20(p===-1)%7Bif%20((t%3E1)%20&&%20(badword%3E1))%7Bh=h.substring(0,%20badword);%7Dwindow.location=h.replace(/https:%5C/%5C/%5Ba-z%5D+/,%20'https://pro');%20%7D
+javascript:h=window.location.href;i=h.indexOf('imdb.com');p=h.indexOf('https://pro.imdb.com');t=h.indexOf('title');c=h.indexOf('combined');f=h.indexOf('fullcredits');r=h.indexOf('reference');badword=Math.max(c,f,r);if(i===-1)%7Bwindow.location='https://pro.imdb.com/name/nm2825198/'%7Delse%20if(p===0)%7Bwindow.location=h.replace('https://pro','https://www')%7Delse%20if(p===-1)%7Bif((t%3E1)&&(badword%3E1))%7Bh=h.substring(0,badword)%7Dwindow.location=h.replace(/https:%5C/%5C/%5Ba-z%5D+/,'https://pro');%7D;
 ```
 
 ## Options
@@ -169,3 +169,9 @@ node src/make-bookmarklet.js inputfile.js
 ### For contributors
 
 If you're contributing, see DEVELOPMENT.md for setup, testing, linting, and release notes. Please run `npm test` and `npm run lint` locally and add tests for public-facing changes before opening a PR.
+
+## Disclaimer
+
+### Comments
+
+The comment-removal process handles common comments and uses of slashes. It is not a full JavaScript parser. It covers typical cases, but isn't complete for all JavaScript syntax.
