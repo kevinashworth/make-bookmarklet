@@ -6,6 +6,7 @@
   "changelog": "@changesets/cli/changelog",
   "commit": false,
   "ignore": [],
+  "privatePackages": { "version": true, "tag": true },
   "fixed": [],
   "linked": [],
   "updateInternalDependencies": "patch"

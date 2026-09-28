@@ -1,6 +1,7 @@
 {
   "name": "make-bookmarklet",
   "version": "2.1.2",
+  "private": true,
   "description": "A Node program to convert small JavaScript files to bookmarklet-ready code.",
   "keywords": [
     "JavaScript",
