@@ -30,6 +30,15 @@
 - proper YAML syntax ([afa34e5](https://github.com/kevinashworth/make-bookmarklet/commit/afa34e50e9c6e5759c7fcaf50ef42aa29fa8e65b))
 - update permissions for CI jobs in workflow ([aa37ff6](https://github.com/kevinashworth/make-bookmarklet/commit/aa37ff6af82edd62650ff797fdf101688e737b54))
 
+## 2.1.2
+
+### Patch Changes
+
+- 82f45cc: - **Add** changesets.
+  - **Remove** semantic-release.
+
+  This is my first changeset. Choosing `patch` as a cautious first step. I expect to use changesets manually for this changeset, and then figure out an automated workflow.
+
 ## 2.0.0 — 2026-01-20
 
 ### BREAKING CHANGES

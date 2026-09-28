@@ -1,6 +1,6 @@
 {
   "name": "make-bookmarklet",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A Node program to convert small JavaScript files to bookmarklet-ready code.",
   "keywords": [
     "JavaScript",
@@ -31,10 +31,7 @@
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "check:shell": "shellcheck ./scripts/*.sh",
-    "test": "vitest",
-    "release:dry-run": "npm run release:dry-run:main",
-    "release:dry-run:main": "sh ./scripts/release-dry-run-main.sh",
-    "release:dry-run:feature": "sh ./scripts/release-dry-run-feature.sh"
+    "test": "vitest"
   },
   "dependencies": {
     "chalk": "5.6.2",
@@ -43,6 +40,7 @@
     "oxfmt": "0.70.0"
   },
   "devDependencies": {
+    "@changesets/cli": "3.0.3",
     "execa": "9.6.1",
     "markdownlint-cli2": "0.23.3",
     "oxlint": "1.85.0",
