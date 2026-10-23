@@ -44,7 +44,7 @@
     "execa": "10.2.0",
     "markdownlint-cli2": "0.23.3",
     "oxlint": "1.88.0",
-    "vitest": "4.1.7"
+    "vitest": "5.0.5"
   },
   "engines": {
     "node": ">=22"
