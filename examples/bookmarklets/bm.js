@@ -1,0 +1,1 @@
+javascript:%E0
