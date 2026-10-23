@@ -1,7 +1,9 @@
 {
   "config": {
-    "MD004": { "style": "consistent" },
+    "MD004": {
+      "style": "consistent"
+    },
     "MD013": false
   },
-  "ignores": ["CHANGELOG.md"]
+  "ignores": ["CHANGELOG.md", "NOTE-TO-SELF.md"]
 }
