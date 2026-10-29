@@ -30,6 +30,14 @@
 - proper YAML syntax ([afa34e5](https://github.com/kevinashworth/make-bookmarklet/commit/afa34e50e9c6e5759c7fcaf50ef42aa29fa8e65b))
 - update permissions for CI jobs in workflow ([aa37ff6](https://github.com/kevinashworth/make-bookmarklet/commit/aa37ff6af82edd62650ff797fdf101688e737b54))
 
+## 2.1.4
+
+### Patch Changes
+
+- c98c423: update packages
+  
+  At the end of the process, ncu shows "All dependencies not in cooldown match the latest package versions :)"
+
 ## 2.1.3
 
 ### Patch Changes
