@@ -25,7 +25,7 @@ export default async function unmakeBookmarklet() {
     console.log('');
     console.log('Examples:');
     console.log('  $ node src/unmake-bookmarklet.js foo.js');
-    console.log('  $ cat bookmarklet.js | node src/unmake-bookmarklet.js');
+    console.log('  $ cat foo.js | node src/unmake-bookmarklet.js');
     console.log('  $ node src/unmake-bookmarklet.js foo.js --no-clipboard > pretty.js');
   });
   program.version(version);
